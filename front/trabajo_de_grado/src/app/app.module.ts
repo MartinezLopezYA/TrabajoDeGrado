@@ -7,6 +7,7 @@ import { LoginComponent } from './containers/login/login.component';
 import { SinginComponent } from './containers/singin/singin.component';
 import { PerfilComponent } from './containers/perfil/perfil.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,8 @@ import { PerfilComponent } from './containers/perfil/perfil.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

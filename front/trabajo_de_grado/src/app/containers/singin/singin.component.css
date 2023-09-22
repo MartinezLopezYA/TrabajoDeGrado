@@ -1,0 +1,213 @@
+:root{
+    --colorPrimary: (#002557);
+    --colorSecundario: (#E9C010);
+    --colorUrls: (#0F86D6);
+}
+
+/* Reinicio de estilos */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+.body{
+    width: 100%;
+    height: 100vh;
+    background-color: grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    width: 80%;
+    background-color: #ffffff46;   
+}
+
+.vista {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar{
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;
+    padding: 0 20px ;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar h1 {
+    color: #000000;
+    font-weight: 700;
+    font-size: 26px;
+}
+
+.navbar h1::after {
+    color: #E9C010;
+    content: "+";
+}
+
+.navbar img {
+    height: 60px !important;
+}
+
+.navbar hr{ 
+    border: none;
+    border-left: 2px solid hsla(200, 10%, 50%,100);
+    height: 50px;
+    width: 2px;
+    color: #002557;       
+}
+
+.vistaformulario {
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    gap: 5px;
+}
+
+.form-container { 
+    width: 70%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-image: url("../../../assets/LogoAPP.png");
+    background-repeat: no-repeat;   
+    background-size: cover;
+    border-radius: 5px;
+}
+
+.form-container::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(51, 51, 51, 0.884);
+    border-radius: 5px;
+}
+
+.formulario {    
+    z-index: 100;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 40px; 
+}
+
+.formulario h3 {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.formulario h3, .formulario div {
+    z-index: 99;
+    color: #ffffff;
+}
+
+.params {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.params input {
+    width: 400px;
+    height: 40px;
+    color: #ffffff;
+    border-radius: 5px;
+    border: none;
+    padding: 0 10px;
+    background-color: rgba(51, 51, 51, 0.46);
+    border: 1px solid #00000046;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.46);
+    transition: all 0.3s ease-in-out;
+}
+
+.params input:focus, input:hover {
+    transform: scale(1.06);
+}
+
+.params input::placeholder {
+    color: #ffffff;
+}
+
+.params-group {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.params-group input { 
+    width: 180px;
+}
+
+#nacimiento::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.btn-params {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+
+.btn-params button {
+    width: 175px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-params button:nth-child(1) {
+    background-color: #002557;
+}
+
+.btn-params button:nth-child(3) { 
+    background-color: #E9C010;
+}
+
+.btn-params button:focus, button:hover {
+    transform: scale(1.06); 
+}
+
+.aside-container {
+    width: 30%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.aside-container img{
+    width: 50%;
+}
+
+.formulario hr {
+    z-index: 98;
+    width: 400px;
+    height: 3px;
+    background-color: #ffffff;
+}   

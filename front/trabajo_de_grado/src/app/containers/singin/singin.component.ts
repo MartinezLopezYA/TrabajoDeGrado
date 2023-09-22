@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class SinginComponent {
 
+  constructor(){
+  }
+
+  nombreApp = 'MD Tutor';
+
 }
