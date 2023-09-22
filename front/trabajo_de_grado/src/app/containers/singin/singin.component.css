@@ -159,6 +159,9 @@
     width: 180px;
 }
 
+#nacimiento::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
 
 .btn-params {
     display: flex;
