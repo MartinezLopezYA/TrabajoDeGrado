@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class PerfilComponent {
 
+  constructor(){}
+
+  nombreUsuario = 'Andres Martinez';
+  usuario = 'Andres Martinez';
+  correoInstitucionl = 'andres@uniminuto.edu.co';
+  semestreActual = 'Décimo';
+  documento = 1010110;
+
 }
