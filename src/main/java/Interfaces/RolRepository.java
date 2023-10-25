@@ -1,9 +1,9 @@
-package Interfaces;
+package interfaces;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import Models.Rol;
+import models.Rol;
 
 @Repository
 public interface RolRepository extends JpaRepository<Rol, String>{
