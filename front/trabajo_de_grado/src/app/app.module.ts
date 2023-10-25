@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormPerfilComponent } from './containers/acciones/perfil/modal/form-perfil/form-perfil.component';
+import { NavbarComponent } from './globales/navbar/navbar.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FormPerfilComponent } from './containers/acciones/perfil/modal/form-per
     InicioComponent,
     RecursosComponent,
 
-    FormPerfilComponent
+    FormPerfilComponent,
+      NavbarComponent
   ],
   imports: [
     BrowserModule,

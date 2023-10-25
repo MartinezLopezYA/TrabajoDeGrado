@@ -9,7 +9,6 @@ export class PerfilComponent {
 
   constructor(){}
 
-  nombreUsuario = 'Andres Martinez';
   usuario = 'Andres Martinez';
   correoInstitucionl = 'andres@uniminuto.edu.co';
   semestreActual = 'Décimo';
