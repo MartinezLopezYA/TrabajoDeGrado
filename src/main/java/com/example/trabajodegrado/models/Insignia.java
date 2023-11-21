@@ -1,4 +1,4 @@
-package models;
+package com.example.trabajodegrado.models;
 
 import java.util.Date;
 
