@@ -5,12 +5,13 @@
             <div class="foto-perfil">
                 <img src="../../../assets/Freepik - Img Perfil.png" alt="">
             </div>
-            <div class="informacion-personal">
-                <p>{{ usuario }}</p>
-                <p>{{ correoInstitucionl }}</p>
-                <p>{{ semestreActual }}</p>
-                <p>{{ documento }}</p>
-                <a href="#">Editar Información</a>
+            <div *ngIf="usuarioAutenticado" class="informacion-personal">
+                <p>{{ usuarioAutenticado.idUsuario }}</p>
+                <p>{{ usuarioAutenticado.nombreUsuario }} {{ usuarioAutenticado.apellidoUsuario }} </p>
+                <p>{{ usuarioAutenticado.correoUsuario }}</p>
+                <p>{{ usuarioAutenticado.fechaNacimiento }}</p>
+                <p>{{ usuarioAutenticado.semestre }} </p>
+                <a (click)="editarInformacion()" >Editar Información</a>
             </div>
             <div class="avance">
                 <img src="../../../assets/DinoSoftLab - Porcentaje Avance.png" alt="Porcentaje de Avance">

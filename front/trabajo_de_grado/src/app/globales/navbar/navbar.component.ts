@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,6 +8,14 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
-  nombreUsuario = 'Andres Martinez';
+  constructor (
+    private service: LoginService
+  ) {
+
+  }
+
+  get usuarioAutenticado(){
+    return this.service.usuarioEncontrado;
+  };
 
 }

@@ -1,1 +1,30 @@
-<p>form-perfil works!</p>
+<!-- editar-informacion.component.html -->
+
+<h2>Editar Información</h2>
+
+<form [formGroup]="formularioEdicion" (ngSubmit)="guardarEdicion()">
+  <div>
+    <label for="nombreUsuario">Nombre de Usuario:</label>
+    <input type="text" id="nombreUsuario" formControlName="nombreUsuario" required />
+  </div>
+
+  <div>
+    <label for="apellidoUsuario">Apellido de Usuario:</label>
+    <input type="text" id="apellidoUsuario" formControlName="apellidoUsuario" required />
+  </div>
+
+  <div>
+    <label for="semestre">Semestre:</label>
+    <input type="text" id="semestre" formControlName="semestre" required />
+  </div>
+
+  <div>
+    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+    <input type="date" id="fechaNacimiento" formControlName="fechaNacimiento" required />
+  </div>
+
+  <div class="botones">
+    <button type="submit" routerLink="/perfil">Guardar</button>
+    <button type="button" (click)="cancelarEdicion()">Cancelar</button>
+  </div>
+</form>

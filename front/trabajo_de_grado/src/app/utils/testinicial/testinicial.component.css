@@ -1,0 +1,11 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+    font-weight: 600;
+}
+
+.modal-test {
+    justify-content: center;
+}

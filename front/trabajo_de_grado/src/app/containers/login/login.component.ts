@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -10,49 +10,44 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit{
 
-  public myForm!: FormGroup;
+  loginForm: FormGroup;
 
   constructor(
-
-    private fb:FormBuilder,
-    private loging:LoginService,
-    private router:Router
-
-  ){}
+    private fb: FormBuilder, 
+    private authService: LoginService,
+    private router: Router) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
+    });
+  }
 
   nombreApp = 'MD Tutor';
 
+  
   ngOnInit():void{ 
-
-    this.myForm = this.inicioSesion()
-
   }
 
-  inicioSesion():FormGroup{
-   return this.fb.group({
-    email:['',[Validators.required]],
-    password:['',[Validators.required]]
-   });
-  }
-
-  ingresar(){
-    if (this.myForm.invalid){
-      Object.values(this.myForm.controls).forEach(control => {
-        control.markAllAsTouched();
-      });
-      return;
-    }
-
-    if (!this.loging.ingresar(this.myForm.value)){
-      alert('Alumno no Registrado');
+  iniciarSesion(): void {
+    if (this.loginForm.valid) {
+      const email = this.loginForm.get('email')?.value;
+      const password = this.loginForm.get('password')?.value;
+        this.authService.login(email, password).subscribe(
+        (loginExitoso) => {
+          if (loginExitoso) {
+            console.log('Login exitoso');
+            this.router.navigate(['/perfil']);
+          } else {
+            console.error('Error en el login');
+          }
+        },
+        (error) => {
+          console.error('Error en el login', error);
+        }
+      );
     } else {
-      this.router.navigate(['/perfil']);
+      this.loginForm.markAllAsTouched();
     }
-      
-  }
-
-  get f():any {
-    return this.myForm.controls;
   }
 
 }

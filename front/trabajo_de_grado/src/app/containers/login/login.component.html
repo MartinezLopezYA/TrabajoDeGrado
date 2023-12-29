@@ -9,14 +9,14 @@
             </div> 
             <div class="vistaformulario ">
                 <div class="form-container container modal-content">
-                    <form  [formGroup]="myForm" (ngSubmit)="ingresar()">
+                    <form  [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
                         <div class="formulario">
                             <div>
                                 <h3>INICIAR SESIÓN</h3>
                             </div>
                             <div class="params">
-                                <input formControlName="email" class="form-control" id="email" name="email" type="email" placeholder="Correo Electronico" [class.is-invalid]="f.email.errors && f.email.touched">
-                                <input formControlName="password" class="form-control" id="password" name="password" type="password" placeholder="Contraseña" [class.is-invalid]="f.password.errors && f.password.touched">
+                                <input formControlName="email" class="form-control" id="email" name="email" type="email" placeholder="Correo Electronico">
+                                <input formControlName="password" class="form-control" id="password" name="password" type="password" placeholder="Contraseña">
                                 <div class="invalid-feedback">
                                     Ingrese todos los campos
                                   </div>
