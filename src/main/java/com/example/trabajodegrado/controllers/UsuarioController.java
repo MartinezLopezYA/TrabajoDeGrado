@@ -1,7 +1,6 @@
 package com.example.trabajodegrado.controllers;
 
 import com.example.trabajodegrado.intServices.IUsuarioService;
-import com.example.trabajodegrado.interfaces.UsuarioRepository;
 import com.example.trabajodegrado.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,6 @@ import java.util.Optional;
 public class UsuarioController {
     @Autowired
     private IUsuarioService service;
-    private UsuarioRepository repository;
 
     @GetMapping("/listausuarios")
     @ResponseBody

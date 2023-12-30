@@ -1,6 +1,9 @@
 package com.example.trabajodegrado.models;
 
 import java.util.Date;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import jakarta.persistence.*;
 
@@ -11,20 +14,32 @@ public class Usuario {
     @Id
     @Column(name = "id_usuario")
     private int idUsuario;
-    @Column(name = "nombre_usuario")
+    @Column(name = "nombre_usuario", length = 50)
     private String nombreUsuario;
-    @Column(name = "apellido_usuario")
+    @Column(name = "apellido_usuario", length = 50)
     private String apellidoUsuario;
-    @Column(name = "correo_usuario")
+    @Column(name = "correo_usuario", length = 100)
     private String correoUsuario;
-    @Column(name = "semestre")
+    @Column(name = "semestre", length = 11)
     private int semestre;
-    @Column(name = "contrasena")
+    @Column(name = "contrasena", length = 30)
     private String contrasena;
+    @Temporal(TemporalType.DATE)
     @Column(name = "fecha_nacimiento")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "UTC")
     private Date fechaNacimiento;
     @Column(name = "foto_perfil")
     private Byte fotoPerfil;
+
+    @OneToMany(mappedBy ="usuario")
+    List<Insignia> insignia;
+
+    @OneToMany(mappedBy ="usuario")
+    List<Curso> curso;
+
+    @ManyToOne
+    @JoinColumn(name = "id_rol")
+    private Rol rol;
 
     public Usuario() {
     }
