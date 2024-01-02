@@ -1,0 +1,17 @@
+<nav class="navbar">
+    <div class="logo">
+        <a href="https://www.uniminuto.edu/" target="_blank"> <img src="../../../assets/LogoUniminutoBlanco.png"
+            alt="Logo Uniminuto"> 
+        </a>
+    </div>
+    <div class="vinculos nav nav-underline active">
+        <a routerLink="/inicio" class="nav-link"><ol class="nav-item">INICIO</ol></a>
+        <a routerLink="/recursos" class="nav-link"><ol class="nav-item">RECURSOS</ol></a>
+        <a routerLink="/inicio" class="nav-link"><ol class="nav-item">INSIGNIAS</ol></a>
+        <a routerLink="/perfil" class="nav-link"><ol class="nav-item">PERFIL</ol></a>
+    </div>
+    <div class="acciones-perfil">
+        <p> {{ usuarioAutenticado?.nombreUsuario }} </p>
+        <a id="perfil" href="#"><img src="../../../assets/PixelPerfect-Sesión.png" alt="Perfil"></a>
+    </div>
+</nav>
