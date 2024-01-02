@@ -2,6 +2,9 @@ package com.example.trabajodegrado.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -39,6 +42,24 @@ public class Rol {
 
     public void setNombreRol(String nombreRol) {
         this.nombreRol = nombreRol;
+    }
+
+    @Override
+    public String toString() {
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            ObjectNode jsonNode = objectMapper.createObjectNode();
+            jsonNode.put("idRol", idRol);
+            jsonNode.put("nombreRol", nombreRol);
+
+            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonNode);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{}"; 
+        }
+        
     }
 
 }

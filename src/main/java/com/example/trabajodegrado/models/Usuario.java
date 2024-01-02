@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import jakarta.persistence.*;
 
@@ -11,6 +13,7 @@ import jakarta.persistence.*;
 @Table(name = "usuario")
 public class Usuario {
     
+    public static final String JSON = null;
     @Id
     @Column(name = "id_usuario")
     private int idUsuario;
@@ -118,4 +121,27 @@ public class Usuario {
     public void setFotoPerfil(Byte fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
+
+    @Override
+    public String toString() {
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            ObjectNode jsonNode = objectMapper.createObjectNode();
+            jsonNode.put("idUsuario", idUsuario);
+            jsonNode.put("nombreUsuario", nombreUsuario);
+            jsonNode.put("apellidoUsuario", apellidoUsuario);
+            jsonNode.put("correoUsuario", correoUsuario);
+            jsonNode.put("semestre", semestre);
+            jsonNode.put("fechaNacimiento", fechaNacimiento.toString());
+
+            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonNode);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{}"; 
+        }
+        
+    }
+    
 }

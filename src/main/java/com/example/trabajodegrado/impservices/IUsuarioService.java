@@ -1,4 +1,4 @@
-package com.example.trabajodegrado.intServices;
+package com.example.trabajodegrado.impservices;
 
 import com.example.trabajodegrado.models.Usuario;
 
@@ -10,6 +10,5 @@ public interface IUsuarioService {
     Optional<Usuario> editarUsuario(int idUsuario);
     public void guardarUsuario(Usuario user);
     public void eliminarUsuario(int idUsuario);
-
 
 }
