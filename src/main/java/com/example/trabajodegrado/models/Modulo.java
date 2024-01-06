@@ -2,6 +2,9 @@ package com.example.trabajodegrado.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +16,8 @@ public class Modulo {
     private String idModulo;
     @Column(name = "nombre_modulo", length = 50)
     private String nombreModulo;
+    @Column(name = "descripcion_modulo", length = 200)
+    private String descripcionModulo;
 
     @OneToMany(mappedBy = "modulo")
     List<Insignia> insignia;
@@ -28,9 +33,10 @@ public class Modulo {
     public Modulo() {
     }
 
-    public Modulo(String idModulo, String nombreModulo) {
+    public Modulo(String idModulo, String nombreModulo, String descripcionModulo) {
         this.idModulo = idModulo;
         this.nombreModulo = nombreModulo;
+        this.descripcionModulo = descripcionModulo;
     }
 
     public String getIdModulo() {
@@ -49,5 +55,31 @@ public class Modulo {
         this.nombreModulo = nombreModulo;
     }
 
+    public String getDescripcionModulo() {
+        return descripcionModulo;
+    }
+
+    public void setDescripcionModulo(String descripcionModulo) {
+        this.descripcionModulo = descripcionModulo;
+    }
+
+    @Override
+    public String toString() {
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            ObjectNode jsonNode = objectMapper.createObjectNode();
+            jsonNode.put("idModulo", idModulo);
+            jsonNode.put("nombreModulo", nombreModulo);
+            jsonNode.put("descripcionModulo", descripcionModulo);
+
+            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonNode);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{}"; 
+        }
+        
+    }
     
 }

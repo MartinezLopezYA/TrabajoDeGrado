@@ -2,6 +2,9 @@ package com.example.trabajodegrado.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -63,6 +66,23 @@ public class Curso {
         this.descripcionCurso = descripcionCurso;
     }
 
-    
+    @Override
+    public String toString() {
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            ObjectNode jsonNode = objectMapper.createObjectNode();
+            jsonNode.put("idCurso", idCurso);
+            jsonNode.put("nombreCurso", nombreCurso);
+            jsonNode.put("descripcionCurso", descripcionCurso);
+
+            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonNode);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{}"; 
+        }
+        
+    }
 
 }

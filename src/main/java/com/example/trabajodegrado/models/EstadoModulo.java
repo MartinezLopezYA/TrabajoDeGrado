@@ -1,5 +1,8 @@
 package com.example.trabajodegrado.models;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -36,4 +39,22 @@ public class EstadoModulo {
         this.valorEstadoModulo = valorEstadoModulo;
     }
     
+    @Override
+    public String toString() {
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            ObjectNode jsonNode = objectMapper.createObjectNode();
+            jsonNode.put("idEstadoModulo", idEstadoModulo);
+            jsonNode.put("valorEstadoModulo", valorEstadoModulo);
+
+            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(jsonNode);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "{}"; 
+        }
+        
+    }
+
 }
