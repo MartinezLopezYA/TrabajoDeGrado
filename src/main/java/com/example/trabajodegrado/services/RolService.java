@@ -3,6 +3,8 @@ package com.example.trabajodegrado.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.example.trabajodegrado.interfaces.RolRepository;
@@ -18,11 +20,10 @@ public class RolService {
         this.rolRepository = rolRepository;
     }
 
-    //Uso String porque no es necesario tener paginación por la cantidad de registros
-    public String getRoles() {
-        return "" + rolRepository.findAll();
+    public Page<Rol> getRoles(PageRequest pageRequest) {
+        return rolRepository.findAll(pageRequest);
     }
-
+    
     public String saveRol(Rol newRol, String idRol, String nombreRol) {
 
         Optional<Rol> existById = rolRepository.findById(idRol);

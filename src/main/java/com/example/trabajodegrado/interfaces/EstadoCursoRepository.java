@@ -8,4 +8,6 @@ import com.example.trabajodegrado.models.EstadoCurso;
 @Repository
 public interface EstadoCursoRepository extends JpaRepository<EstadoCurso, String>{
     
+    public EstadoCurso findByIdEstadoCurso(String idEstadoCurso);
+
 }

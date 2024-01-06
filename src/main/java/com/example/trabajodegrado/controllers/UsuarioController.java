@@ -23,7 +23,6 @@ public class UsuarioController {
 
     @GetMapping("/listausuarios")
     public Page<Usuario> getUsuarios(
-        
             @RequestParam(name = "startIndex", required = false, defaultValue = "0") int pageNo,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize, 
             @RequestParam(name = "orderBy", required = false, defaultValue = "idUsuario") String orderBy,

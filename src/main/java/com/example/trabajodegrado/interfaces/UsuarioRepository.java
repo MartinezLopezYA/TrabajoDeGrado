@@ -14,7 +14,6 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
     // Page<Usuario> findByIdUsuario(Pageable page, Integer idUsuario);
     Page<Usuario> findBySemestre(Pageable page, Integer semestre);
 
-
     public Usuario findByIdUsuario(int idUsuario);
     public Usuario findByNombreUsuario(String nombreUsuario);
     public Usuario findByApellidoUsuario(String apellidoUsuario);

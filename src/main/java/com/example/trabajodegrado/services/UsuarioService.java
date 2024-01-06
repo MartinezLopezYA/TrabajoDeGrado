@@ -20,8 +20,6 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    
-    //Uso Page porque es necesario tener paginación por la cantidad de registros
     public Page<Usuario> getUsuarios(PageRequest pageRequest) {
         return usuarioRepository.findAll(pageRequest);
     }
