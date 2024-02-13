@@ -9,29 +9,29 @@
             </div>
             <div class="vistaformulario ">
                 <div class="form-container container modal-content">
-                    <form action="">
+                    <form [formGroup]="myForm">
                         <div class="formulario">
                             <div>
                                 <h3>REGISTRAR USUARIO</h3>
                             </div>
                             <div class="params">
-                                <input class="form-control" type="email" placeholder="Correo Electronico"> 
+                                <input formControlName="correoUsuario" matInput #input class="form-control" type="email" placeholder="Correo Electronico"> 
                                 <div class="params-group">
-                                    <input class="form-control" type="text" placeholder="Nombre">
-                                    <input class="form-control" type="text" placeholder="Apellido">
+                                    <input formControlName="nombreUsuario" matInput #input class="form-control" type="text" placeholder="Nombre">
+                                    <input formControlName="apellidoUsuario" matInput #input class="form-control" type="text" placeholder="Apellido">
                                 </div>
                                 <div class="params-group">
-                                    <input class="form-control" type="password" placeholder="Contraseña">
-                                    <input class="form-control" type="number" placeholder="ID">
+                                    <input formControlName="contrasena" matInput #input class="form-control" type="password" placeholder="Contraseña">
+                                    <input formControlName="idUsuario" matInput #input class="form-control" type="number" placeholder="ID">
                                 </div>
                                 <div class="params-group">
-                                    <input class="form-control" type="number" placeholder="Semestre">
-                                    <input class="form-control" id="nacimiento" type="date">
+                                    <input formControlName="semestre" matInput #input class="form-control" type="number" placeholder="Semestre">
+                                    <input formControlName="fechaNacimiento" matInput #input class="form-control" id="nacimiento" type="date">
                                 </div>
                             </div>
                             <hr>
                             <div class="btn-params">
-                                <button type="submit"> REGISTRARSE </button>
+                                <button type="button" (click)="registroUsuarioFront()" routerLink="/login"> REGISTRARSE </button>
                                 <p> ó </p>
                                 <button type="button" routerLink="/login"> CANCELAR </button>
                             </div>

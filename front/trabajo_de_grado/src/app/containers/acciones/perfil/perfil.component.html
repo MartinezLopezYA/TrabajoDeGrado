@@ -1,33 +1,17 @@
+<app-navbar></app-navbar>
 <section class="body">
-    <nav class="navbar">
-        <div class="logo">
-            <a href="https://www.uniminuto.edu/" target="_blank"> <img src="../../../assets/LogoUniminuto.png"
-                alt="Logo Uniminuto"> 
-            </a>
-        </div>
-        <div class="vinculos nav nav-underline active">
-            <a href="#" class="nav-link"><ol class="nav-item">INICIO</ol></a>
-            <a href="#" class="nav-link"><ol class="nav-item">RECURSOS</ol></a>
-            <a href="#" class="nav-link"><ol class="nav-item">INSIGNEAS</ol></a>
-            <a href="#" class="nav-link"><ol class="nav-item">PERFIL</ol></a>
-        </div>
-        <div class="acciones-perfil">
-            <p> {{ nombreUsuario }} </p>
-            <a id="perfil" href="#"><img src="../../../assets/PixelPerfect-Sesión.png" alt="Perfil"></a>
-        </div>
-    </nav>
-
     <section class="container">
         <div class="datos-personales">
             <div class="foto-perfil">
                 <img src="../../../assets/Freepik - Img Perfil.png" alt="">
             </div>
-            <div class="informacion-personal">
-                <p>{{ usuario }}</p>
-                <p>{{ correoInstitucionl }}</p>
-                <p>{{ semestreActual }}</p>
-                <p>{{ documento }}</p>
-                <a href="#">Editar Información</a>
+            <div *ngIf="usuarioAutenticado" class="informacion-personal">
+                <p>{{ usuarioAutenticado.idUsuario }}</p>
+                <p>{{ usuarioAutenticado.nombreUsuario }} {{ usuarioAutenticado.apellidoUsuario }} </p>
+                <p>{{ usuarioAutenticado.correoUsuario }}</p>
+                <p>{{ usuarioAutenticado.fechaNacimiento }}</p>
+                <p>{{ usuarioAutenticado.semestre }} </p>
+                <a (click)="editarInformacion()" >Editar Información</a>
             </div>
             <div class="avance">
                 <img src="../../../assets/DinoSoftLab - Porcentaje Avance.png" alt="Porcentaje de Avance">
