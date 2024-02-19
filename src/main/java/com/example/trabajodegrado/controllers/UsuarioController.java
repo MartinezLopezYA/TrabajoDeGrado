@@ -1,5 +1,6 @@
 package com.example.trabajodegrado.controllers;
 
+import com.example.trabajodegrado.exceptions.UsuarioException;
 import com.example.trabajodegrado.models.Usuario;
 import com.example.trabajodegrado.services.UsuarioService;
 
@@ -62,27 +63,39 @@ public class UsuarioController {
     }
 
     @PostMapping("/registrarusuario/{idUsuario}/{correo}")
-    public ResponseEntity<Usuario> saveUsuario(
+    public ResponseEntity<?> saveUsuario(
             @PathVariable int idUsuario,
             @PathVariable String correo,
             @RequestBody Usuario newUsuario) {
-        Usuario saveUser = usuarioService.saveUsuario(newUsuario, idUsuario, correo);
-        return new ResponseEntity<>(saveUser, HttpStatus.CREATED);
+        try {
+            Usuario saveUsuario = usuarioService.saveUsuario(newUsuario, idUsuario, correo);
+            return new ResponseEntity<>(saveUsuario, HttpStatus.CREATED);
+        } catch (UsuarioException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @PutMapping("/editarusuario/{idUsuario}")
-    public ResponseEntity<Usuario> updateUsuario(
+    public ResponseEntity<?> updateUsuario(
             @PathVariable int idUsuario,
             @RequestBody Usuario newUsuario) {
-        Usuario updateUsuario = usuarioService.updateUsuario(idUsuario, newUsuario);
-        return new ResponseEntity<>(updateUsuario, HttpStatus.OK);
+        try {
+            Usuario updateUsuario = usuarioService.updateUsuario(idUsuario, newUsuario);
+            return new ResponseEntity<>(updateUsuario, HttpStatus.OK);
+        } catch (UsuarioException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/eliminarusuario")
-    public ResponseEntity<Usuario> deleteUsuario(
+    public ResponseEntity<?> deleteUsuario(
             @RequestParam(name = "idUsuario") int idUsuario) {
-        Usuario deleteUsuario = usuarioService.deleteUsuario(idUsuario);
-        return new ResponseEntity<>(deleteUsuario, HttpStatus.OK);
+        try {
+            Usuario deleteUsuario = usuarioService.deleteUsuario(idUsuario);
+            return ResponseEntity.ok("Usuario eliminado" );
+        } catch (UsuarioException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
 }

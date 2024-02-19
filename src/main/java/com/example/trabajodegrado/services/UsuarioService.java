@@ -1,9 +1,8 @@
 package com.example.trabajodegrado.services;
 
+import com.example.trabajodegrado.exceptions.UsuarioException;
 import com.example.trabajodegrado.interfaces.UsuarioRepository;
 import com.example.trabajodegrado.models.Usuario;
-
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -74,56 +73,44 @@ public class UsuarioService {
         Usuario existUser = usuarioRepository.findByIdUsuario(idUsuario);
         Usuario existUsuario = usuarioRepository.findByCorreoUsuario(correo);
 
-        try {
-
-            if (existUser != null) {
-                return existUser;
-            } else if (existUsuario != null) {
-                return existUsuario;
-            } else {
-                return usuarioRepository.save(newUsuario);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+        if (existUser != null) {
+            throw new UsuarioException("El usuario con ID " + idUsuario + " ya existe.");
+        } else if (existUsuario != null) {
+            throw new UsuarioException("El usuario con correo " + correo + " ya existe.");
+        } else {
+            return usuarioRepository.save(newUsuario);
         }
 
     }
 
     public Usuario updateUsuario(int idUsuario, Usuario newUsuario) {
 
-        Optional<Usuario> usuario = usuarioRepository.findById(idUsuario);
+        Usuario existUser = usuarioRepository.findByIdUsuario(idUsuario);
 
-        if (usuario.isPresent()) {
-            Usuario exist = usuario.get();
-            exist.setNombreUsuario(newUsuario.getNombreUsuario());
-            exist.setApellidoUsuario(newUsuario.getApellidoUsuario());
-            exist.setSemestre(newUsuario.getSemestre());
-            exist.setFechaNacimiento(newUsuario.getFechaNacimiento());
-
-            try {
-                return usuarioRepository.save(exist);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
+        if (existUser == null) {
+            throw new UsuarioException("No se encontró ningún usuario con el ID " + idUsuario);
         } else {
-            return null;
+            existUser.setNombreUsuario(newUsuario.getNombreUsuario());
+            existUser.setApellidoUsuario(newUsuario.getApellidoUsuario());
+            existUser.setSemestre(newUsuario.getSemestre());
+            existUser.setFechaNacimiento(newUsuario.getFechaNacimiento());
+            usuarioRepository.save(existUser);
+            return existUser;
         }
 
     }
 
     public Usuario deleteUsuario(int idUsuario) {
 
-        Optional<Usuario> usuario = usuarioRepository.findById(idUsuario);
+        Usuario existUser = usuarioRepository.findByIdUsuario(idUsuario);
 
-        if (usuario.isPresent()) {
-            usuarioRepository.delete(usuario.get());
+        if (existUser == null) {
+            throw new UsuarioException("No se encontró ningún usuario con el ID " + idUsuario);
         } else {
-            throw new RuntimeException("No se encontró ningún usuario con el ID proporcionado");
+            usuarioRepository.delete(existUser);
+            return existUser;
         }
 
-        return null;
     }
 
 }
