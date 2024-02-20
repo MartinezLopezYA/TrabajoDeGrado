@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 
-    // Page<Usuario> findByIdUsuario(Pageable page, Integer idUsuario);
+    Page<Usuario> findByIdUsuario(Pageable page, Integer idUsuario);
     Page<Usuario> findBySemestre(Pageable page, Integer semestre);
 
     public Usuario findByIdUsuario(int idUsuario);

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import jakarta.persistence.*;
+import utils.annotations.DomainCheck;
 
 @Entity
 @Table(name = "usuario")

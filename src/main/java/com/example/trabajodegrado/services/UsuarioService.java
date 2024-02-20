@@ -1,9 +1,10 @@
 package com.example.trabajodegrado.services;
 
+import utils.exceptions.UsuarioException;
 import com.example.trabajodegrado.interfaces.UsuarioRepository;
 import com.example.trabajodegrado.models.Usuario;
 
-import java.util.Optional;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +14,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsuarioService {
 
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
+
+    private static final String correoValid = "^[a-zA-Z0-9._%+-]+@uniminuto\\.edu\\.co$";
+    private static final Pattern pattern = Pattern.compile(correoValid);
 
     @Autowired
     public UsuarioService(UsuarioRepository usuarioRepository) {
@@ -24,24 +28,24 @@ public class UsuarioService {
         return usuarioRepository.findAll(pageRequest);
     }
 
-    public String getByIdUsuario(Integer idUsuario) {
-
-        Usuario result = usuarioRepository.findByIdUsuario(idUsuario);
+    public Page<Usuario> getByIdUsuario(PageRequest pageRequest, Integer idUsuario) {
 
         try {
             if (idUsuario == null) {
-                return "Digite un ID";
+                return Page.empty();
             } else {
-                if (result != null) {
-                    return "" + result;
+                Page<Usuario> result = usuarioRepository.findByIdUsuario(pageRequest, idUsuario);
+                
+                if (result != null && result.hasContent()) {
+                    return result;
                 } else {
-                    return "No existe ningún estudiante con ese ID";
-                }
+                    return Page.empty();
+                }    
             }
         } catch (Exception e) {
-            return "Error al encontrar Usuario " + e;
+            e.printStackTrace();
+            return Page.empty();
         }
-
     }
 
     public Page<Usuario> getBySemestre(PageRequest pageRequest, Integer semestre) {
@@ -69,61 +73,53 @@ public class UsuarioService {
 
     }
 
-    public String saveUsuario(Usuario newUsuario, int idUsuario, String correo) {
+    public Usuario saveUsuario(Usuario newUsuario, int idUsuario, String correo) {
 
-        Optional<Usuario> existById = usuarioRepository.findById(idUsuario);
-        Usuario existByCorreo = usuarioRepository.findByCorreoUsuario(correo);
+        Usuario existUser = usuarioRepository.findByIdUsuario(idUsuario);
+        Usuario existUsuario = usuarioRepository.findByCorreoUsuario(correo);
 
-        try {
-            if (usuarioRepository.existsById(idUsuario)) {
-                return "Ya existe el usuario con este Id: " + existById.toString();
-            } else if (existByCorreo.equals(existByCorreo)) {
-                return "Ya existe el usuario con el Correo: " + existByCorreo.getCorreoUsuario();
-            } else {
-                usuarioRepository.save(newUsuario);
-                return "Usuario registrado con exito";
-            }
-        } catch (Exception e) {
-            return "Error al registrar el usuario " + e;
+        if (existUser != null) {
+            throw new UsuarioException("El usuario con ID " + idUsuario + " ya existe.");
+        } else if (existUsuario != null) {
+            throw new UsuarioException("El usuario con correo " + correo + " ya existe.");
+        } else if (!isValidCorreo(correo)){
+            throw new UsuarioException("El correo debe terminar tener el dominio uniminuto.edu.co");
+        } else {
+            return usuarioRepository.save(newUsuario);
         }
 
     }
 
-    public String updateUsuario(int idUsuario, Usuario newUsuario) {
+    private boolean isValidCorreo(String correo) {
+        return pattern.matcher(correo).matches();
+    }
 
-        Optional<Usuario> existUsuario = usuarioRepository.findById(idUsuario);
+    public Usuario updateUsuario(int idUsuario, Usuario newUsuario) {
 
-        try {
-            if (existUsuario.isPresent()) {
+        Usuario existUser = usuarioRepository.findByIdUsuario(idUsuario);
 
-                Usuario exist = existUsuario.get();
-
-                exist.setNombreUsuario(newUsuario.getNombreUsuario());
-                exist.setApellidoUsuario(newUsuario.getApellidoUsuario());
-                exist.setSemestre(newUsuario.getSemestre());
-                exist.setFechaNacimiento(newUsuario.getFechaNacimiento());
-
-                usuarioRepository.save(exist);
-
-                return "Usuario actualizado con exito: \n" + exist.toString();
-
-            } else {
-                return "No existe ningún usuario con este Id";
-            }
-        } catch (Exception e) {
-            return "Error al actualizar el usuario";
+        if (existUser == null) {
+            throw new UsuarioException("No se encontró ningún usuario con el ID " + idUsuario);
+        } else {
+            existUser.setNombreUsuario(newUsuario.getNombreUsuario());
+            existUser.setApellidoUsuario(newUsuario.getApellidoUsuario());
+            existUser.setSemestre(newUsuario.getSemestre());
+            existUser.setFechaNacimiento(newUsuario.getFechaNacimiento());
+            usuarioRepository.save(existUser);
+            return existUser;
         }
 
     }
 
-    public String deleteUsuario(int idUsuario) {
+    public Usuario deleteUsuario(int idUsuario) {
 
-        try {
-            Usuario usuario = usuarioRepository.findById(idUsuario).get();
-            usuarioRepository.delete(usuario);
-            return "Registro eliminado de la tabla Usuario";
-        } catch (Exception e) {
-            return "No se pudo completar la ejecución de la tabla Usuario" + e;
+        Usuario existUser = usuarioRepository.findByIdUsuario(idUsuario);
+
+        if (existUser == null) {
+            throw new UsuarioException("No se encontró ningún usuario con el ID " + idUsuario);
+        } else {
+            usuarioRepository.delete(existUser);
+            return existUser;
         }
 
     }
