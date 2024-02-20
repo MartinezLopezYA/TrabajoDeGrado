@@ -1,8 +1,10 @@
 package com.example.trabajodegrado.services;
 
-import com.example.trabajodegrado.exceptions.UsuarioException;
+import utils.exceptions.UsuarioException;
 import com.example.trabajodegrado.interfaces.UsuarioRepository;
 import com.example.trabajodegrado.models.Usuario;
+
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +15,9 @@ import org.springframework.stereotype.Service;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+
+    private static final String correoValid = "^[a-zA-Z0-9._%+-]+@uniminuto\\.edu\\.co$";
+    private static final Pattern pattern = Pattern.compile(correoValid);
 
     @Autowired
     public UsuarioService(UsuarioRepository usuarioRepository) {
@@ -77,10 +82,16 @@ public class UsuarioService {
             throw new UsuarioException("El usuario con ID " + idUsuario + " ya existe.");
         } else if (existUsuario != null) {
             throw new UsuarioException("El usuario con correo " + correo + " ya existe.");
+        } else if (!isValidCorreo(correo)){
+            throw new UsuarioException("El correo debe terminar tener el dominio uniminuto.edu.co");
         } else {
             return usuarioRepository.save(newUsuario);
         }
 
+    }
+
+    private boolean isValidCorreo(String correo) {
+        return pattern.matcher(correo).matches();
     }
 
     public Usuario updateUsuario(int idUsuario, Usuario newUsuario) {

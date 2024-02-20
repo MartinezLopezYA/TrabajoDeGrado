@@ -1,4 +1,4 @@
-package com.example.trabajodegrado.exceptions;
+package utils.exceptions;
 
 public class UsuarioException extends RuntimeException {
 

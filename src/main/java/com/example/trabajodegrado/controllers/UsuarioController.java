@@ -1,6 +1,6 @@
 package com.example.trabajodegrado.controllers;
 
-import com.example.trabajodegrado.exceptions.UsuarioException;
+import utils.exceptions.UsuarioException;
 import com.example.trabajodegrado.models.Usuario;
 import com.example.trabajodegrado.services.UsuarioService;
 
