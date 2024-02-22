@@ -28,6 +28,7 @@ public class EstadoCursoController {
         this.estadoCursoService = estadoCursoService;
     }
 
+    @SuppressWarnings("null")
     @GetMapping("/listaestadoscursos")
     public Page<EstadoCurso> getEstadosCurso(
             @RequestParam(name = "startIndex", required = false, defaultValue = "0") int pageNo,

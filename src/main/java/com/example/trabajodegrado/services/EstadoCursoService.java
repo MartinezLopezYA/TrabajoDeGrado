@@ -20,10 +20,12 @@ public class EstadoCursoService {
         this.estadoCursoRepository = estadoCursoRepository;
     }
 
+    @SuppressWarnings("null")
     public Page<EstadoCurso> getEstadosCurso(PageRequest pageRequest) {
         return estadoCursoRepository.findAll(pageRequest);
     }
 
+    @SuppressWarnings("null")
     public String saveEstadoCurso(EstadoCurso newEstadoCurso, String idEstadoCurso) {
 
         Optional<EstadoCurso> existById = estadoCursoRepository.findById(idEstadoCurso);

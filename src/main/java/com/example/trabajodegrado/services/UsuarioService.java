@@ -24,6 +24,7 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
+    @SuppressWarnings("null")
     public Page<Usuario> getUsuarios(PageRequest pageRequest) {
         return usuarioRepository.findAll(pageRequest);
     }
@@ -73,19 +74,24 @@ public class UsuarioService {
 
     }
 
+    @SuppressWarnings("null")
     public Usuario saveUsuario(Usuario newUsuario, int idUsuario, String correo) {
 
-        Usuario existUser = usuarioRepository.findByIdUsuario(idUsuario);
-        Usuario existUsuario = usuarioRepository.findByCorreoUsuario(correo);
+        Usuario existUserById = usuarioRepository.findByIdUsuario(idUsuario);
+        Usuario existUserByCorreoUsuario = usuarioRepository.findByCorreoUsuario(correo);
 
-        if (existUser != null) {
-            throw new UsuarioException("El usuario con ID " + idUsuario + " ya existe.");
-        } else if (existUsuario != null) {
-            throw new UsuarioException("El usuario con correo " + correo + " ya existe.");
-        } else if (!isValidCorreo(correo)){
-            throw new UsuarioException("El correo debe terminar tener el dominio uniminuto.edu.co");
-        } else {
-            return usuarioRepository.save(newUsuario);
+        try {
+            if (existUserById != null) {
+                throw new UsuarioException("El usuario con ID " + idUsuario + " ya existe.");
+            } else if (existUserByCorreoUsuario != null) {
+                throw new UsuarioException("El usuario con correo " + correo + " ya existe.");
+            } else if (!isValidCorreo(correo)){
+                throw new UsuarioException("El correo debe terminar tener el dominio uniminuto.edu.co");
+            } else {
+                return usuarioRepository.save(newUsuario);
+            }
+        } catch (UsuarioException e) {
+            throw new UsuarioException("Error al registrar el Usuario " + e);
         }
 
     }
@@ -96,30 +102,38 @@ public class UsuarioService {
 
     public Usuario updateUsuario(int idUsuario, Usuario newUsuario) {
 
-        Usuario existUser = usuarioRepository.findByIdUsuario(idUsuario);
+        Usuario existUserById = usuarioRepository.findByIdUsuario(idUsuario);
 
-        if (existUser == null) {
-            throw new UsuarioException("No se encontró ningún usuario con el ID " + idUsuario);
-        } else {
-            existUser.setNombreUsuario(newUsuario.getNombreUsuario());
-            existUser.setApellidoUsuario(newUsuario.getApellidoUsuario());
-            existUser.setSemestre(newUsuario.getSemestre());
-            existUser.setFechaNacimiento(newUsuario.getFechaNacimiento());
-            usuarioRepository.save(existUser);
-            return existUser;
+        try {
+            if (existUserById == null) {
+                throw new UsuarioException("No se encontró ningún usuario con el ID " + idUsuario);
+            } else {
+                existUserById.setNombreUsuario(newUsuario.getNombreUsuario());
+                existUserById.setApellidoUsuario(newUsuario.getApellidoUsuario());
+                existUserById.setSemestre(newUsuario.getSemestre());
+                existUserById.setFechaNacimiento(newUsuario.getFechaNacimiento());
+                usuarioRepository.save(existUserById);
+                return existUserById;
+            }
+        } catch (UsuarioException e) {
+            throw new UsuarioException("Error al actualizar el Usuario " + e);
         }
 
     }
 
     public Usuario deleteUsuario(int idUsuario) {
 
-        Usuario existUser = usuarioRepository.findByIdUsuario(idUsuario);
+        Usuario existUserById = usuarioRepository.findByIdUsuario(idUsuario);
 
-        if (existUser == null) {
-            throw new UsuarioException("No se encontró ningún usuario con el ID " + idUsuario);
-        } else {
-            usuarioRepository.delete(existUser);
-            return existUser;
+        try {
+            if (existUserById == null) {
+                throw new UsuarioException("No se encontró ningún usuario con el ID " + idUsuario);
+            } else {
+                usuarioRepository.delete(existUserById);
+                return existUserById;
+            }
+        } catch (UsuarioException e) {
+            throw new UsuarioException("Error al eliminar el usuario " + e);
         }
 
     }

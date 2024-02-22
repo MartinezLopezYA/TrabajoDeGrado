@@ -1,7 +1,5 @@
 package com.example.trabajodegrado.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,9 +8,11 @@ import org.springframework.stereotype.Service;
 import com.example.trabajodegrado.interfaces.InsigniaRepository;
 import com.example.trabajodegrado.models.Insignia;
 
+import utils.exceptions.InsigniaException;
+
 @Service
 public class InsigniaService {
-    
+
     private InsigniaRepository insigniaRepository;
 
     @Autowired
@@ -20,24 +20,25 @@ public class InsigniaService {
         this.insigniaRepository = insigniaRepository;
     }
 
+    @SuppressWarnings("null")
     public Page<Insignia> getInsignias(PageRequest pageRequest) {
         return insigniaRepository.findAll(pageRequest);
     }
 
     public Page<Insignia> getByTituloInsignia(PageRequest pageRequest, String tituloInsignia) {
-        
-        try{
-            if (tituloInsignia.equals("")){
+
+        try {
+            if (tituloInsignia.equals("")) {
                 return Page.empty();
             } else {
                 Page<Insignia> result = insigniaRepository.findByTituloInsignia(pageRequest, tituloInsignia);
-                
-                if (result != null && result.hasContent()){
+
+                if (result != null && result.hasContent()) {
                     return result;
                 } else {
                     return Page.empty();
                 }
-            
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,56 +47,55 @@ public class InsigniaService {
 
     }
 
-    public String saveInsignia(Insignia newinsignia, Integer idinsignia) {
+    @SuppressWarnings("null")
+    public Insignia saveInsignia(Insignia newInsignia, int idInsignia) {
 
-        Optional<Insignia> existById = insigniaRepository.findById(idinsignia);
+        Insignia existByIdInsignia = insigniaRepository.findByIdInsignia(idInsignia);
 
         try {
-            if (insigniaRepository.existsById(idinsignia)) {
-                return "Ya existe insignia con ese codigo: " + existById.toString();
+            if (existByIdInsignia != null) {
+                throw new InsigniaException("Ya existe una Insignia con el ID: " + idInsignia);
             } else {
-                insigniaRepository.save(newinsignia);
-                return "Insignia registrado con exito";
+                return insigniaRepository.save(newInsignia);
             }
-        } catch (Exception e) {
-            return "Error al registrar el insignia " + e;
+        } catch (InsigniaException e) {
+            throw new InsigniaException("Error al registrar la Insignia " + e);
         }
 
     }
 
-    public String updateInsignia(Integer idinsignia, Insignia newinsignia) {
+    public Insignia updateInsignia(int idInsignia, Insignia newInsignia) {
 
-        Optional<Insignia> existinsignia = insigniaRepository.findById(idinsignia);
+        Insignia existInsigniaById = insigniaRepository.findByIdInsignia(idInsignia);
 
         try {
-            if (existinsignia.isPresent()) {
-
-                Insignia exist = existinsignia.get();
-
-                exist.setTituloInsignia(newinsignia.getTituloInsignia());
-                exist.setFechaInsignia(newinsignia.getFechaInsignia());
-
-                insigniaRepository.save(exist);
-
-                return "insignia actualizado con exito: \n" + exist.toString();
-
+            if (existInsigniaById == null) {
+                throw new InsigniaException("No se encontró la Insignia con el ID: " + idInsignia);
             } else {
-                return "No existe ningún insignia con este Id";
-            }
-        } catch (Exception e) {
-            return "Error al actualizar el insignia";
+                existInsigniaById.setTituloInsignia(newInsignia.getTituloInsignia());
+                existInsigniaById.setFechaInsignia(newInsignia.getFechaInsignia());
+                insigniaRepository.save(existInsigniaById);
+                return existInsigniaById;
+            }   
+        } catch (InsigniaException e) {
+            throw new InsigniaException("Error al actualizar la Insignia " + e);
         }
 
     }
 
-    public String deleteInsignia(Integer idinsignia) {
+    public Insignia deleteInsignia(int idInsignia) {
+
+        Insignia existInsigniaById = insigniaRepository.findByIdInsignia(idInsignia);
 
         try {
-            Insignia insignia = insigniaRepository.findById(idinsignia).get();
-            insigniaRepository.delete(insignia);
-            return "Registro eliminado de la tabla insignia";
+            if (existInsigniaById == null) {
+                throw new InsigniaException("No se encontró ninguna Insignia con el ID: " + idInsignia);
+            } else {
+                insigniaRepository.delete(existInsigniaById);
+                return existInsigniaById;
+            }
         } catch (Exception e) {
-            return "No se pudo completar la ejecución de la tabla insignia" + e;
+            throw new InsigniaException("Error al eliminar la Insignia " + e);
         }
 
     }

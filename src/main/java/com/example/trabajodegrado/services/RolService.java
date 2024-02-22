@@ -1,7 +1,5 @@
 package com.example.trabajodegrado.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.trabajodegrado.interfaces.RolRepository;
 import com.example.trabajodegrado.models.Rol;
+import utils.exceptions.RolException;
 
 @Service
 public class RolService {
@@ -20,26 +19,44 @@ public class RolService {
         this.rolRepository = rolRepository;
     }
 
+    @SuppressWarnings("null")
     public Page<Rol> getRoles(PageRequest pageRequest) {
         return rolRepository.findAll(pageRequest);
     }
-    
-    public String saveRol(Rol newRol, String idRol, String nombreRol) {
 
-        Optional<Rol> existById = rolRepository.findById(idRol);
-        Rol existByNombreRol = rolRepository.findByNombreRol(nombreRol);
+    @SuppressWarnings("null")
+    public Rol saveRol(Rol newRol, String idRol, String nombreRol) {
+
+        Rol existRolById = rolRepository.findByIdRol(idRol);
+        Rol existRolByNombre = rolRepository.findByNombreRol(nombreRol);
 
         try {
-            if (rolRepository.existsById(idRol)) {
-                return "Ya existe rol con ese codigo: " + existById.toString();
-            } else if (existByNombreRol != null && existByNombreRol.getNombreRol().equals(newRol.getNombreRol())) {
-                return "Ya existe rol con ese nombre: " + existByNombreRol.getNombreRol();
+            if (existRolById != null) {
+                throw new RolException("Ya existe un Rol con el ID: " + idRol);
+            } else if (existRolByNombre != null) {
+                throw new RolException("Ya existe un Rol con el nombre: " + nombreRol);
             } else {
-                rolRepository.save(newRol);
-                return "Rol registrado con exito";
+                return rolRepository.save(newRol);
             }
-        } catch (Exception e) {
-            return "Error al registrar el usuario " + e;
+        } catch (RolException e) {
+            throw new RolException("Error al guardar Rol " + e);
+        }
+
+    }
+
+    public Rol deleteRol(String idRol) {
+
+        Rol existRolById = rolRepository.findByIdRol(idRol);
+
+        try {
+            if (existRolById == null) {
+                throw new RolException("No se encontró ningún Rol con el ID " + idRol);
+            } else {
+                rolRepository.delete(existRolById);
+                return existRolById;
+            }
+        } catch (RolException e) {
+            throw new RolException("Error al eliminar Rol " + e);
         }
 
     }

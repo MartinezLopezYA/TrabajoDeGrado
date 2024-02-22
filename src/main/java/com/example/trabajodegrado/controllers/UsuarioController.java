@@ -24,6 +24,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    @SuppressWarnings("null")
     @GetMapping("/listausuarios")
     public Page<Usuario> getUsuarios(
             @RequestParam(name = "startIndex", required = false, defaultValue = "0") int pageNo,
@@ -48,6 +49,7 @@ public class UsuarioController {
         return usuarioService.getByIdUsuario(pageRequest, idUsuario);
     }
 
+    @SuppressWarnings("null")
     @GetMapping("/getBySemestre/{semestre}")
     public Page<Usuario> getBySemestre(
         @RequestParam(name = "startIndex", required = false, defaultValue = "0") int pageNo,
@@ -91,7 +93,7 @@ public class UsuarioController {
     public ResponseEntity<?> deleteUsuario(
             @RequestParam(name = "idUsuario") int idUsuario) {
         try {
-            Usuario deleteUsuario = usuarioService.deleteUsuario(idUsuario);
+            usuarioService.deleteUsuario(idUsuario);
             return ResponseEntity.ok("Usuario eliminado" );
         } catch (UsuarioException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
