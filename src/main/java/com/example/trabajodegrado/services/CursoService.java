@@ -1,19 +1,17 @@
 package com.example.trabajodegrado.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
 import com.example.trabajodegrado.interfaces.CursoRepository;
 import com.example.trabajodegrado.models.Curso;
+import utils.exceptions.CursoException;
 
 @Service
 public class CursoService {
 
-    private CursoRepository cursoRepository;
+    private final CursoRepository cursoRepository;
 
     @Autowired
     public CursoService(CursoRepository cursoRepository) {
@@ -24,61 +22,73 @@ public class CursoService {
         return cursoRepository.findAll(pageRequest);
     }
 
-    public String saveCurso(Curso newcurso, String idcurso, String nombreCurso) {
+    public Page<Curso> getByIdCurso(PageRequest pageRequest, String idCurso) {
+        if (idCurso == null) {
+            return Page.empty();
+        } else {
+            Page<Curso> result = cursoRepository.findByIdCurso(pageRequest, idCurso);
 
-        Optional<Curso> existById = cursoRepository.findById(idcurso);
-        Curso existByNombreCurso = cursoRepository.findByNombreCurso(nombreCurso);
-
-        try {
-            if (cursoRepository.existsById(idcurso)) {
-                return "Ya existe curso con ese codigo: " + existById.toString();
-            } else if (existByNombreCurso != null && existByNombreCurso.getNombreCurso().equals(newcurso.getNombreCurso())) {
-                return "Ya existe curso con ese nombre: " + existByNombreCurso.getNombreCurso();
+            if (result != null && result.hasContent()) {
+                return result;
             } else {
-                cursoRepository.save(newcurso);
-                return "Rol registrado con exito";
+                return Page.empty();
             }
-        } catch (Exception e) {
-            return "Error al registrar el curso " + e;
         }
-
     }
 
-    public String updateCurso(String idcurso, Curso newcurso) {
+    public Page<Curso> getByNombreCurso(PageRequest pageRequest, String nombreCurso){
+        if (nombreCurso == null){
+            return Page.empty();
+        } else {
+            Page<Curso> result = cursoRepository.findByNombreCurso(pageRequest, nombreCurso);
 
-        Optional<Curso> existcurso = cursoRepository.findById(idcurso);
-
-        try {
-            if (existcurso.isPresent()) {
-
-                Curso exist = existcurso.get();
-
-                exist.setNombreCurso(newcurso.getNombreCurso());
-                exist.setDescripcionCurso(newcurso.getDescripcionCurso());
-
-                cursoRepository.save(exist);
-
-                return "curso actualizado con exito: \n" + exist.toString();
-
+            if (result != null && result.hasContent()){
+                return result;
             } else {
-                return "No existe ningún curso con este Id";
+                return Page.empty();
             }
-        } catch (Exception e) {
-            return "Error al actualizar el curso";
         }
-
     }
 
-    public String deleteCurso(String idcurso) {
+    public Curso saveCurso(Curso newCurso, String idCurso, String nombreCurso) {
+        Curso existCurso = cursoRepository.findByIdCurso(idCurso);
+        Curso existNombreCurso = cursoRepository.findByNombreCurso(nombreCurso);
 
-        try {
-            Curso curso = cursoRepository.findById(idcurso).get();
-            cursoRepository.delete(curso);
-            return "Registro eliminado de la tabla curso";
-        } catch (Exception e) {
-            return "No se pudo completar la ejecución de la tabla curso" + e;
+        if (existCurso != null){
+            throw new CursoException("Ya existe un curso con el ID " + idCurso);
+        } else if (existNombreCurso != null){
+            throw new CursoException("El nombre de este curso ya existe");
+        } else {
+            return cursoRepository.save(newCurso);
         }
-
     }
-    
+
+    public Curso updateCurso(String idCurso, String nombreCurso, Curso newCurso) {
+        Curso existCurso = cursoRepository.findByIdCurso(idCurso);
+        Curso existCursoBynombre = cursoRepository.findByNombreCurso(nombreCurso);
+
+        if (existCurso == null){
+            throw new CursoException("No se encontro ningun curso con el ID " + idCurso);
+        } else if (existCursoBynombre != null) {
+            throw new CursoException("El nombre de este curso ya existe");
+        } else {
+                existCurso.setNombreCurso(newCurso.getNombreCurso());
+                existCurso.setDescripcionCurso(newCurso.getDescripcionCurso());
+                cursoRepository.save(existCurso);
+                return existCurso;
+        }
+    }
+
+
+    public Curso deleteCurso(String idCurso) {
+        Curso existCurso = cursoRepository.findByIdCurso(idCurso);
+
+        if (existCurso == null){
+            throw new CursoException("No se encontro ningun curso con el ID " + idCurso);
+        } else {
+            cursoRepository.delete(existCurso);
+            return existCurso;
+        }
+    }
+
 }
