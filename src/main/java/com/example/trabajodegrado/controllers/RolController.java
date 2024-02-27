@@ -17,7 +17,7 @@ import utils.exceptions.RolException;
 @CrossOrigin(origins = "http://localhost:4200")
 public class RolController {
 
-    private RolService rolService;
+    private final RolService rolService;
 
     @Autowired
     public RolController(RolService rolService) {
@@ -38,14 +38,15 @@ public class RolController {
         return rolService.getRoles(pageRequest);
     }
 
-    @PostMapping("/registrarrol/{idRol}/{nombreRol}")
+    @PostMapping("/registrarrol")
     public ResponseEntity<?> saveRol(
-            @PathVariable String idRol,
-            @PathVariable String nombreRol,
+            @RequestParam(name = "idRol") String idRol,
+            @RequestParam(name = "nombreRol") String nombreRol,
             @RequestBody Rol newRol) {
         try {
             Rol saveRol = rolService.saveRol(newRol, idRol, nombreRol);
-            return new ResponseEntity<>(saveRol, HttpStatus.CREATED);
+            new ResponseEntity<>(saveRol, HttpStatus.CREATED);
+            return ResponseEntity.ok("Rol registrado con éxito");
         } catch (RolException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }

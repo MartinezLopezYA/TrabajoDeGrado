@@ -13,7 +13,7 @@ import utils.exceptions.ModuloException;
 @Service
 public class ModuloService {
     
-    private ModuloRepository moduloRepository;
+    private final ModuloRepository moduloRepository;
 
     @Autowired
     public ModuloService(ModuloRepository moduloRepository) {
@@ -25,21 +25,16 @@ public class ModuloService {
         return moduloRepository.findAll(pageRequest);
     }
 
-
     @SuppressWarnings("null")
     public Modulo saveModulo(Modulo newModulo, String idModulo) {
 
         Modulo existByIdModulo = moduloRepository.findByIdModulo(idModulo);
 
-        try {
-            if (existByIdModulo != null) {
-                throw new ModuloException("Ya existe un modulo con ese codigo: " + idModulo);
-            } else {
-                return moduloRepository.save(newModulo);
-            }
-        } catch (ModuloException e) {
-            throw new ModuloException("Error al guardar Modulo" + e);
-        }  
+        if (existByIdModulo != null) {
+            throw new ModuloException("Ya existe un modulo con ese codigo: " + idModulo);
+        } else {
+            return moduloRepository.save(newModulo);
+        }
 
     }
 
@@ -47,35 +42,26 @@ public class ModuloService {
 
         Modulo existModuloByIdModulo = moduloRepository.findByIdModulo(idModulo);
 
-        try {
-            if (existModuloByIdModulo == null) {
-                throw new ModuloException("No se encontró ningún Modulo con el ID: " + idModulo);
-            } else {
-                existModuloByIdModulo.setNombreModulo(newModulo.getNombreModulo());
-                existModuloByIdModulo.setDescripcionModulo(newModulo.getDescripcionModulo());
-                moduloRepository.save(existModuloByIdModulo);
-                return existModuloByIdModulo;
-            }
-        } catch (ModuloException e) {
-            throw new ModuloException("Error al actualizar el Modulo" + e);
+        if (existModuloByIdModulo == null) {
+            throw new ModuloException("No se encontró ningún Modulo con el ID: " + idModulo);
+        } else {
+            existModuloByIdModulo.setNombreModulo(newModulo.getNombreModulo());
+            existModuloByIdModulo.setDescripcionModulo(newModulo.getDescripcionModulo());
+            moduloRepository.save(existModuloByIdModulo);
+            return existModuloByIdModulo;
         }
 
     }
 
     @SuppressWarnings("null")
-    public Modulo deleteModulo(String idModulo) {
+    public void deleteModulo(String idModulo) {
 
         Modulo existModuloById = moduloRepository.findByIdModulo(idModulo);
 
-        try {
-            if (existModuloById != null) {
-                throw new ModuloException("No se encontró ningún usuario con el ID: " + idModulo);
-            } else {
-                moduloRepository.delete(existModuloById);
-                return existModuloById;
-            }
-        } catch (ModuloException e) {
-            throw new ModuloException("Error al eliminar el Modulo " + e);
+        if (existModuloById == null) {
+            throw new ModuloException("No se encontró ningún usuario con el ID: " + idModulo);
+        } else {
+            moduloRepository.delete(existModuloById);
         }
 
     }

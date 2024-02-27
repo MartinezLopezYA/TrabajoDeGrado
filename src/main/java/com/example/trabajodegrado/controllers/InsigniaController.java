@@ -27,7 +27,7 @@ import utils.exceptions.InsigniaException;
 @CrossOrigin(origins = "http://localhost:4200")
 public class InsigniaController {
     
-    private InsigniaService insigniaService;
+    private final InsigniaService insigniaService;
 
     @Autowired
     public InsigniaController(InsigniaService insigniaService) {
@@ -49,13 +49,13 @@ public class InsigniaController {
     }
 
     @SuppressWarnings("null")
-    @GetMapping("/getByTituloInsignia/{tituloInsignia}")
+    @GetMapping("/getByTituloInsignia")
     public Page<Insignia> getByTituloInsignia(
         @RequestParam(name = "startIndex", required = false, defaultValue = "0") int pageNo,
         @RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize, 
         @RequestParam(name = "orderBy", required = false, defaultValue = "idUsuario") String orderBy,
         @RequestParam(name = "direction", required = false, defaultValue = "asc") String direction,
-        @PathVariable String tituloInsignia) {
+        @RequestParam(name = "tituloInsignia") String tituloInsignia) {
 
             Sort sort = Sort.by(Sort.Direction.fromString(direction), orderBy);    
             PageRequest pageRequest = PageRequest.of(pageNo, pageSize, sort);
@@ -63,25 +63,27 @@ public class InsigniaController {
         return insigniaService.getByTituloInsignia(pageRequest, tituloInsignia);
     }
 
-    @PostMapping("/registrarinsignia/{idInsignia}")
+    @PostMapping("/registrarinsignia")
     public ResponseEntity<?> saveInsignia(
-            @PathVariable int idInsignia,
+            @RequestParam(name = "idInsignia") int idInsignia,
             @RequestBody Insignia newInsignia) {
         try {
             Insignia saveInsignia = insigniaService.saveInsignia(newInsignia, idInsignia);
-            return new ResponseEntity<>(saveInsignia, HttpStatus.CREATED);
+            new ResponseEntity<>(saveInsignia, HttpStatus.CREATED);
+            return ResponseEntity.ok("Insignia Creada con éxito");
         } catch (InsigniaException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @PutMapping("/editarinsignia/{idInsignia}")
+    @PutMapping("/editarinsignia")
     public ResponseEntity<?> updateInsignia(
-            @PathVariable int idInsignia,
+            @RequestParam(name = "idInsignia") int idInsignia,
             @RequestBody Insignia newInsignia) {
         try {
             Insignia updatedInsignia = insigniaService.updateInsignia(idInsignia, newInsignia);
-            return new ResponseEntity<>(updatedInsignia, HttpStatus.OK);
+            new ResponseEntity<>(updatedInsignia, HttpStatus.OK);
+            return ResponseEntity.ok("Insignia actualizada con éxito");
         } catch (InsigniaException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

@@ -27,7 +27,7 @@ import utils.exceptions.ModuloException;
 @CrossOrigin(origins = "http://localhost:4200")
 public class ModuloController {
     
-    private ModuloService moduloService;
+    private final ModuloService moduloService;
 
     @Autowired
     public ModuloController(ModuloService moduloService) {
@@ -48,25 +48,27 @@ public class ModuloController {
         return moduloService.getModulos(pageRequest);
     }
 
-    @PostMapping("/registrarmodulo/{idModulo}")
+    @PostMapping("/registrarmodulo")
     public ResponseEntity<?> saveModulo(
-            @PathVariable String idModulo,
+            @RequestParam(name = "idModulo") String idModulo,
             @RequestBody Modulo newModulo) {
         try {
             Modulo saveModulo = moduloService.saveModulo(newModulo, idModulo);
-            return new ResponseEntity<>(saveModulo, HttpStatus.CREATED);
+            new ResponseEntity<>(saveModulo, HttpStatus.CREATED);
+            return ResponseEntity.ok("Modulo registrado con éxito");
         } catch (ModuloException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @PutMapping("/editarmodulo/{idModulo}")
+    @PutMapping("/editarmodulo")
     public ResponseEntity<?> updateModulo(
-            @PathVariable String idModulo,
+            @RequestParam(name = "idModulo") String idModulo,
             @RequestBody Modulo newModulo) {
         try {
             Modulo updatedModulo = moduloService.updateModulo(idModulo, newModulo);
-            return new ResponseEntity<>(updatedModulo, HttpStatus.OK);
+            new ResponseEntity<>(updatedModulo, HttpStatus.OK);
+            return ResponseEntity.ok("Modulo actualizado con éxito");
         } catch (ModuloException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

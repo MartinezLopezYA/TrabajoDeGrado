@@ -12,7 +12,7 @@ import utils.exceptions.RolException;
 @Service
 public class RolService {
     
-    private RolRepository rolRepository;
+    private final RolRepository rolRepository;
 
     @Autowired
     public RolService(RolRepository rolRepository) {
@@ -30,33 +30,24 @@ public class RolService {
         Rol existRolById = rolRepository.findByIdRol(idRol);
         Rol existRolByNombre = rolRepository.findByNombreRol(nombreRol);
 
-        try {
-            if (existRolById != null) {
-                throw new RolException("Ya existe un Rol con el ID: " + idRol);
-            } else if (existRolByNombre != null) {
-                throw new RolException("Ya existe un Rol con el nombre: " + nombreRol);
-            } else {
-                return rolRepository.save(newRol);
-            }
-        } catch (RolException e) {
-            throw new RolException("Error al guardar Rol " + e);
+        if (existRolById != null) {
+            throw new RolException("Ya existe un Rol con el ID: " + idRol);
+        } else if (existRolByNombre != null) {
+            throw new RolException("Ya existe un Rol con el nombre: " + nombreRol);
+        } else {
+            return rolRepository.save(newRol);
         }
 
     }
 
-    public Rol deleteRol(String idRol) {
+    public void deleteRol(String idRol) {
 
         Rol existRolById = rolRepository.findByIdRol(idRol);
 
-        try {
-            if (existRolById == null) {
-                throw new RolException("No se encontró ningún Rol con el ID " + idRol);
-            } else {
-                rolRepository.delete(existRolById);
-                return existRolById;
-            }
-        } catch (RolException e) {
-            throw new RolException("Error al eliminar Rol " + e);
+        if (existRolById == null) {
+            throw new RolException("No se encontró ningún Rol con el ID " + idRol);
+        } else {
+            rolRepository.delete(existRolById);
         }
 
     }

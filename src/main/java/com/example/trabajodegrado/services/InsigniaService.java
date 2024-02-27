@@ -13,7 +13,7 @@ import utils.exceptions.InsigniaException;
 @Service
 public class InsigniaService {
 
-    private InsigniaRepository insigniaRepository;
+    private final InsigniaRepository insigniaRepository;
 
     @Autowired
     public InsigniaService(InsigniaRepository insigniaRepository) {
@@ -27,22 +27,12 @@ public class InsigniaService {
 
     public Page<Insignia> getByTituloInsignia(PageRequest pageRequest, String tituloInsignia) {
 
-        try {
-            if (tituloInsignia.equals("")) {
-                return Page.empty();
-            } else {
-                Page<Insignia> result = insigniaRepository.findByTituloInsignia(pageRequest, tituloInsignia);
+        Page<Insignia> existInsigniaByTitulo = insigniaRepository.findByTituloInsignia(pageRequest, tituloInsignia);
 
-                if (result != null && result.hasContent()) {
-                    return result;
-                } else {
-                    return Page.empty();
-                }
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Page.empty();
+        if (existInsigniaByTitulo != null){
+            return existInsigniaByTitulo;
+        } else {
+            throw new InsigniaException("No se encontró ninguna insignia con el titulo: " + tituloInsignia);
         }
 
     }
@@ -52,14 +42,10 @@ public class InsigniaService {
 
         Insignia existByIdInsignia = insigniaRepository.findByIdInsignia(idInsignia);
 
-        try {
-            if (existByIdInsignia != null) {
-                throw new InsigniaException("Ya existe una Insignia con el ID: " + idInsignia);
-            } else {
-                return insigniaRepository.save(newInsignia);
-            }
-        } catch (InsigniaException e) {
-            throw new InsigniaException("Error al registrar la Insignia " + e);
+        if (existByIdInsignia != null) {
+            throw new InsigniaException("Ya existe una Insignia con el ID: " + idInsignia);
+        } else {
+            return insigniaRepository.save(newInsignia);
         }
 
     }
@@ -68,34 +54,25 @@ public class InsigniaService {
 
         Insignia existInsigniaById = insigniaRepository.findByIdInsignia(idInsignia);
 
-        try {
-            if (existInsigniaById == null) {
-                throw new InsigniaException("No se encontró la Insignia con el ID: " + idInsignia);
-            } else {
-                existInsigniaById.setTituloInsignia(newInsignia.getTituloInsignia());
-                existInsigniaById.setFechaInsignia(newInsignia.getFechaInsignia());
-                insigniaRepository.save(existInsigniaById);
-                return existInsigniaById;
-            }   
-        } catch (InsigniaException e) {
-            throw new InsigniaException("Error al actualizar la Insignia " + e);
+        if (existInsigniaById == null) {
+            throw new InsigniaException("No se encontró la Insignia con el ID: " + idInsignia);
+        } else {
+            existInsigniaById.setTituloInsignia(newInsignia.getTituloInsignia());
+            existInsigniaById.setFechaInsignia(newInsignia.getFechaInsignia());
+            insigniaRepository.save(existInsigniaById);
+            return existInsigniaById;
         }
 
     }
 
-    public Insignia deleteInsignia(int idInsignia) {
+    public void deleteInsignia(int idInsignia) {
 
         Insignia existInsigniaById = insigniaRepository.findByIdInsignia(idInsignia);
 
-        try {
-            if (existInsigniaById == null) {
-                throw new InsigniaException("No se encontró ninguna Insignia con el ID: " + idInsignia);
-            } else {
-                insigniaRepository.delete(existInsigniaById);
-                return existInsigniaById;
-            }
-        } catch (Exception e) {
-            throw new InsigniaException("Error al eliminar la Insignia " + e);
+        if (existInsigniaById == null) {
+            throw new InsigniaException("No se encontró ninguna Insignia con el ID: " + idInsignia);
+        } else {
+            insigniaRepository.delete(existInsigniaById);
         }
 
     }

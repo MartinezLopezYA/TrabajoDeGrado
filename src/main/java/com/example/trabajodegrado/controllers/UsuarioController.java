@@ -38,11 +38,11 @@ public class UsuarioController {
         return usuarioService.getUsuarios(pageRequest);
     }
 
-    @GetMapping("/getByIdUsuario/{idUsuario}")
+    @GetMapping("/getByIdUsuario")
     public Page<Usuario> getByIdUsuario(
         @RequestParam(name = "startIndex", required = false, defaultValue = "0") int pageNo,
         @RequestParam(name = "pageSize", required = false, defaultValue = "1") int pageSize,
-        @PathVariable Integer idUsuario) {   
+        @RequestParam(name = "idUsuario") int idUsuario) {
 
             PageRequest pageRequest = PageRequest.of(pageNo, pageSize);
 
@@ -50,13 +50,13 @@ public class UsuarioController {
     }
 
     @SuppressWarnings("null")
-    @GetMapping("/getBySemestre/{semestre}")
+    @GetMapping("/getBySemestre")
     public Page<Usuario> getBySemestre(
         @RequestParam(name = "startIndex", required = false, defaultValue = "0") int pageNo,
         @RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize, 
         @RequestParam(name = "orderBy", required = false, defaultValue = "idUsuario") String orderBy,
         @RequestParam(name = "direction", required = false, defaultValue = "asc") String direction,
-        @PathVariable Integer semestre) {
+        @RequestParam(name = "semestre") int semestre) {
 
             Sort sort = Sort.by(Sort.Direction.fromString(direction), orderBy);    
             PageRequest pageRequest = PageRequest.of(pageNo, pageSize, sort);
@@ -64,26 +64,28 @@ public class UsuarioController {
         return usuarioService.getBySemestre(pageRequest, semestre);
     }
 
-    @PostMapping("/registrarusuario/{idUsuario}/{correo}")
+    @PostMapping("/registrarusuario")
     public ResponseEntity<?> saveUsuario(
-            @PathVariable int idUsuario,
-            @PathVariable String correo,
+            @RequestParam(name = "idUsuario") int idUsuario,
+            @RequestParam(name = "correo") String correo,
             @RequestBody Usuario newUsuario) {
         try {
             Usuario saveUsuario = usuarioService.saveUsuario(newUsuario, idUsuario, correo);
-            return new ResponseEntity<>(saveUsuario, HttpStatus.CREATED);
+            new ResponseEntity<>(saveUsuario, HttpStatus.CREATED);
+            return ResponseEntity.ok("Usuario Registrado con éxito");
         } catch (UsuarioException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
-    @PutMapping("/editarusuario/{idUsuario}")
+    @PutMapping("/editarusuario")
     public ResponseEntity<?> updateUsuario(
-            @PathVariable int idUsuario,
+            @RequestParam(name = "idUsuario") int idUsuario,
             @RequestBody Usuario newUsuario) {
         try {
             Usuario updateUsuario = usuarioService.updateUsuario(idUsuario, newUsuario);
-            return new ResponseEntity<>(updateUsuario, HttpStatus.OK);
+            new ResponseEntity<>(updateUsuario, HttpStatus.OK);
+            return ResponseEntity.ok("Usuario Actualizado con éxito");
         } catch (UsuarioException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

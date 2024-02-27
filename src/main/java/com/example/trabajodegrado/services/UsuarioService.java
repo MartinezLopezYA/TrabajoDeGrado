@@ -29,47 +29,25 @@ public class UsuarioService {
         return usuarioRepository.findAll(pageRequest);
     }
 
-    public Page<Usuario> getByIdUsuario(PageRequest pageRequest, Integer idUsuario) {
+    public Page<Usuario> getByIdUsuario(PageRequest pageRequest, int idUsuario) {
 
-        try {
-            if (idUsuario == null) {
-                return Page.empty();
-            } else {
-                Page<Usuario> result = usuarioRepository.findByIdUsuario(pageRequest, idUsuario);
-                
-                if (result != null && result.hasContent()) {
-                    return result;
-                } else {
-                    return Page.empty();
-                }    
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Page.empty();
+        Page<Usuario> existUsuarioById = usuarioRepository.findByIdUsuario(pageRequest, idUsuario);
+        if (existUsuarioById != null) {
+            return existUsuarioById;
+        } else {
+            throw new UsuarioException("No Existe un Usuario con el ID: " + idUsuario);
         }
+
     }
 
-    public Page<Usuario> getBySemestre(PageRequest pageRequest, Integer semestre) {
+    public Page<Usuario> getBySemestre(PageRequest pageRequest, int semestre) {
 
-        try {
-            if (semestre == null) {
-                return Page.empty();
-            } else {
-                if (semestre < 0 || semestre > 10) {
-                    return Page.empty();
-                } else {
-                    Page<Usuario> result = usuarioRepository.findBySemestre(pageRequest, semestre);
+        Page<Usuario> result = usuarioRepository.findBySemestre(pageRequest, semestre);
 
-                    if (result != null && result.hasContent()) {
-                        return result;
-                    } else {
-                        return Page.empty();
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Page.empty();
+        if (result != null) {
+            return result;
+        } else {
+            throw new UsuarioException("No Existe un Usuario que este cursando : " + semestre + " semestre");
         }
 
     }
@@ -80,18 +58,14 @@ public class UsuarioService {
         Usuario existUserById = usuarioRepository.findByIdUsuario(idUsuario);
         Usuario existUserByCorreoUsuario = usuarioRepository.findByCorreoUsuario(correo);
 
-        try {
-            if (existUserById != null) {
-                throw new UsuarioException("El usuario con ID " + idUsuario + " ya existe.");
-            } else if (existUserByCorreoUsuario != null) {
-                throw new UsuarioException("El usuario con correo " + correo + " ya existe.");
-            } else if (!isValidCorreo(correo)){
-                throw new UsuarioException("El correo debe terminar tener el dominio uniminuto.edu.co");
-            } else {
-                return usuarioRepository.save(newUsuario);
-            }
-        } catch (UsuarioException e) {
-            throw new UsuarioException("Error al registrar el Usuario " + e);
+        if (existUserById != null) {
+            throw new UsuarioException("El usuario con ID " + idUsuario + " ya existe.");
+        } else if (existUserByCorreoUsuario != null) {
+            throw new UsuarioException("El usuario con correo " + correo + " ya existe.");
+        } else if (!isValidCorreo(correo)){
+            throw new UsuarioException("El correo debe terminar tener el dominio uniminuto.edu.co");
+        } else {
+            return usuarioRepository.save(newUsuario);
         }
 
     }
@@ -104,36 +78,27 @@ public class UsuarioService {
 
         Usuario existUserById = usuarioRepository.findByIdUsuario(idUsuario);
 
-        try {
-            if (existUserById == null) {
-                throw new UsuarioException("No se encontró ningún usuario con el ID " + idUsuario);
-            } else {
-                existUserById.setNombreUsuario(newUsuario.getNombreUsuario());
-                existUserById.setApellidoUsuario(newUsuario.getApellidoUsuario());
-                existUserById.setSemestre(newUsuario.getSemestre());
-                existUserById.setFechaNacimiento(newUsuario.getFechaNacimiento());
-                usuarioRepository.save(existUserById);
-                return existUserById;
-            }
-        } catch (UsuarioException e) {
-            throw new UsuarioException("Error al actualizar el Usuario " + e);
+        if (existUserById == null) {
+            throw new UsuarioException("No se encontró ningún usuario con el ID " + idUsuario);
+        } else {
+            existUserById.setNombreUsuario(newUsuario.getNombreUsuario());
+            existUserById.setApellidoUsuario(newUsuario.getApellidoUsuario());
+            existUserById.setSemestre(newUsuario.getSemestre());
+            existUserById.setFechaNacimiento(newUsuario.getFechaNacimiento());
+            usuarioRepository.save(existUserById);
+            return existUserById;
         }
 
     }
 
-    public Usuario deleteUsuario(int idUsuario) {
+    public void deleteUsuario(int idUsuario) {
 
         Usuario existUserById = usuarioRepository.findByIdUsuario(idUsuario);
 
-        try {
-            if (existUserById == null) {
-                throw new UsuarioException("No se encontró ningún usuario con el ID " + idUsuario);
-            } else {
-                usuarioRepository.delete(existUserById);
-                return existUserById;
-            }
-        } catch (UsuarioException e) {
-            throw new UsuarioException("Error al eliminar el usuario " + e);
+        if (existUserById == null) {
+            throw new UsuarioException("No se encontró ningún usuario con el ID " + idUsuario);
+        } else {
+            usuarioRepository.delete(existUserById);
         }
 
     }
