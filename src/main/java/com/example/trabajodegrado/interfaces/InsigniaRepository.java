@@ -16,4 +16,6 @@ public interface InsigniaRepository extends JpaRepository<Insignia, Integer>{
     Page<Insignia> findByFechaInsignia(Pageable page, Date fechaInsignia);
     Page<Insignia> findByTipoInsignia(Pageable page, String tipoInsignia);
 
+    public Insignia findByIdInsignia(int id);
+
 }

@@ -4,30 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.trabajodegrado.models.Rol;
 import com.example.trabajodegrado.services.RolService;
+import utils.exceptions.RolException;
 
 @RestController
 @RequestMapping("roles")
 @CrossOrigin(origins = "http://localhost:4200")
 public class RolController {
 
-    private RolService rolService;
+    private final RolService rolService;
 
     @Autowired
     public RolController(RolService rolService) {
         this.rolService = rolService;
     }
 
+    @SuppressWarnings("null")
     @GetMapping("/listaroles")
     public Page<Rol> getRoles(
             @RequestParam(name = "startIndex", required = false, defaultValue = "0") int pageNo,
@@ -41,11 +38,29 @@ public class RolController {
         return rolService.getRoles(pageRequest);
     }
 
-    @PostMapping("/registrarrol/{idRol}/{nombreRol}")
-    public String saveRol(
-            @PathVariable String idRol,
-            @PathVariable String nombreRol,
+    @PostMapping("/registrarrol")
+    public ResponseEntity<?> saveRol(
+            @RequestParam(name = "idRol") String idRol,
+            @RequestParam(name = "nombreRol") String nombreRol,
             @RequestBody Rol newRol) {
-        return rolService.saveRol(newRol, idRol, nombreRol);
+        try {
+            Rol saveRol = rolService.saveRol(newRol, idRol, nombreRol);
+            new ResponseEntity<>(saveRol, HttpStatus.CREATED);
+            return ResponseEntity.ok("Rol registrado con éxito");
+        } catch (RolException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
+
+    @DeleteMapping("/eliminarrol")
+    public ResponseEntity<?> deleteRol(
+            @RequestParam(name = "idRol") String idRol) {
+        try {
+            rolService.deleteRol(idRol);
+            return ResponseEntity.ok("Rol eliminado" );
+        } catch (RolException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 }

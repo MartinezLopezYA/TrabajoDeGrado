@@ -28,6 +28,7 @@ public class EstadoModuloController {
         this.estadoModuloService = estadoModuloService;
     }
 
+    @SuppressWarnings("null")
     @GetMapping("/listaestadosmodulos")
     public Page<EstadoModulo> getEstadosModulo(
             @RequestParam(name = "startIndex", required = false, defaultValue = "0") int pageNo,

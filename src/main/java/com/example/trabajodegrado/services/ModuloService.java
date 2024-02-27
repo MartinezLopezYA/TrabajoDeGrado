@@ -1,7 +1,5 @@
 package com.example.trabajodegrado.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,73 +8,60 @@ import org.springframework.stereotype.Service;
 import com.example.trabajodegrado.interfaces.ModuloRepository;
 import com.example.trabajodegrado.models.Modulo;
 
+import utils.exceptions.ModuloException;
+
 @Service
 public class ModuloService {
     
-    private ModuloRepository moduloRepository;
+    private final ModuloRepository moduloRepository;
 
     @Autowired
     public ModuloService(ModuloRepository moduloRepository) {
         this.moduloRepository = moduloRepository;
     }
 
+    @SuppressWarnings("null")
     public Page<Modulo> getModulos(PageRequest pageRequest) {
         return moduloRepository.findAll(pageRequest);
     }
 
-    public String saveModulo(Modulo newModulo, String idModulo, String nombreModulo) {
+    @SuppressWarnings("null")
+    public Modulo saveModulo(Modulo newModulo, String idModulo) {
 
-        Optional<Modulo> existById = moduloRepository.findById(idModulo);
-        Modulo existByNombreModulo = moduloRepository.findByNombreModulo(nombreModulo);
+        Modulo existByIdModulo = moduloRepository.findByIdModulo(idModulo);
 
-        try {
-            if (moduloRepository.existsById(idModulo)) {
-                return "Ya existe modulo con ese codigo: " + existById.toString();
-            } else if (existByNombreModulo != null && existByNombreModulo.getNombreModulo().equals(newModulo.getNombreModulo())) {
-                return "Ya existe modulo con ese nombre: " + existByNombreModulo.getNombreModulo();
-            } else {
-                moduloRepository.save(newModulo);
-                return "Rol registrado con exito";
-            }
-        } catch (Exception e) {
-            return "Error al registrar el modulo " + e;
+        if (existByIdModulo != null) {
+            throw new ModuloException("Ya existe un modulo con ese codigo: " + idModulo);
+        } else {
+            return moduloRepository.save(newModulo);
         }
 
     }
 
-    public String updateModulo(String idModulo, Modulo newModulo) {
+    public Modulo updateModulo(String idModulo, Modulo newModulo) {
 
-        Optional<Modulo> existModulo = moduloRepository.findById(idModulo);
+        Modulo existModuloByIdModulo = moduloRepository.findByIdModulo(idModulo);
 
-        try {
-            if (existModulo.isPresent()) {
-
-                Modulo exist = existModulo.get();
-
-                exist.setNombreModulo(newModulo.getNombreModulo());
-                exist.setDescripcionModulo(newModulo.getDescripcionModulo());
-
-                moduloRepository.save(exist);
-
-                return "Modulo actualizado con exito: \n" + exist.toString();
-
-            } else {
-                return "No existe ningún modulo con este Id";
-            }
-        } catch (Exception e) {
-            return "Error al actualizar el modulo";
+        if (existModuloByIdModulo == null) {
+            throw new ModuloException("No se encontró ningún Modulo con el ID: " + idModulo);
+        } else {
+            existModuloByIdModulo.setNombreModulo(newModulo.getNombreModulo());
+            existModuloByIdModulo.setDescripcionModulo(newModulo.getDescripcionModulo());
+            moduloRepository.save(existModuloByIdModulo);
+            return existModuloByIdModulo;
         }
 
     }
 
-    public String deleteModulo(String idModulo) {
+    @SuppressWarnings("null")
+    public void deleteModulo(String idModulo) {
 
-        try {
-            Modulo modulo = moduloRepository.findById(idModulo).get();
-            moduloRepository.delete(modulo);
-            return "Registro eliminado de la tabla Modulo";
-        } catch (Exception e) {
-            return "No se pudo completar la ejecución de la tabla Modulo" + e;
+        Modulo existModuloById = moduloRepository.findByIdModulo(idModulo);
+
+        if (existModuloById == null) {
+            throw new ModuloException("No se encontró ningún usuario con el ID: " + idModulo);
+        } else {
+            moduloRepository.delete(existModuloById);
         }
 
     }

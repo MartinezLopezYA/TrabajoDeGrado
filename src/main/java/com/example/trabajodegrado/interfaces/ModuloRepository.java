@@ -8,6 +8,7 @@ import com.example.trabajodegrado.models.Modulo;
 @Repository
 public interface ModuloRepository extends JpaRepository<Modulo, String>{
     
+    public Modulo findByIdModulo(String idModulo);
     public Modulo findByNombreModulo(String nombreModulo);
 
 }

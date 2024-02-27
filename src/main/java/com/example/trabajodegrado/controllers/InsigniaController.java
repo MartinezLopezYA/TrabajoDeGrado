@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,18 +20,21 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.trabajodegrado.models.Insignia;
 import com.example.trabajodegrado.services.InsigniaService;
 
+import utils.exceptions.InsigniaException;
+
 @RestController
 @RequestMapping("insignia")
 @CrossOrigin(origins = "http://localhost:4200")
 public class InsigniaController {
     
-    private InsigniaService insigniaService;
+    private final InsigniaService insigniaService;
 
     @Autowired
     public InsigniaController(InsigniaService insigniaService) {
         this.insigniaService = insigniaService;
     }
 
+    @SuppressWarnings("null")
     @GetMapping("/listainsignias")
     public Page<Insignia> getInsignias(
             @RequestParam(name = "startIndex", required = false, defaultValue = "0") int pageNo,
@@ -43,13 +48,14 @@ public class InsigniaController {
         return insigniaService.getInsignias(pageRequest);
     }
 
-    @GetMapping("/getByTituloInsignia/{tituloInsignia}")
+    @SuppressWarnings("null")
+    @GetMapping("/getByTituloInsignia")
     public Page<Insignia> getByTituloInsignia(
         @RequestParam(name = "startIndex", required = false, defaultValue = "0") int pageNo,
         @RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize, 
         @RequestParam(name = "orderBy", required = false, defaultValue = "idUsuario") String orderBy,
         @RequestParam(name = "direction", required = false, defaultValue = "asc") String direction,
-        @PathVariable String tituloInsignia) {
+        @RequestParam(name = "tituloInsignia") String tituloInsignia) {
 
             Sort sort = Sort.by(Sort.Direction.fromString(direction), orderBy);    
             PageRequest pageRequest = PageRequest.of(pageNo, pageSize, sort);
@@ -57,23 +63,40 @@ public class InsigniaController {
         return insigniaService.getByTituloInsignia(pageRequest, tituloInsignia);
     }
 
-    @PostMapping("/registrarinsignia/{idInsignia}")
-    public String saveInsignia(
-            @PathVariable Integer idInsignia,
+    @PostMapping("/registrarinsignia")
+    public ResponseEntity<?> saveInsignia(
+            @RequestParam(name = "idInsignia") int idInsignia,
             @RequestBody Insignia newInsignia) {
-        return insigniaService.saveInsignia(newInsignia, idInsignia);
+        try {
+            Insignia saveInsignia = insigniaService.saveInsignia(newInsignia, idInsignia);
+            new ResponseEntity<>(saveInsignia, HttpStatus.CREATED);
+            return ResponseEntity.ok("Insignia Creada con éxito");
+        } catch (InsigniaException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
-    @PutMapping("/editarinsignia/{idInsignia}")
-    public String updateInsignia(
-            @PathVariable Integer idInsignia,
+    @PutMapping("/editarinsignia")
+    public ResponseEntity<?> updateInsignia(
+            @RequestParam(name = "idInsignia") int idInsignia,
             @RequestBody Insignia newInsignia) {
-        return insigniaService.updateInsignia(idInsignia, newInsignia);
+        try {
+            Insignia updatedInsignia = insigniaService.updateInsignia(idInsignia, newInsignia);
+            new ResponseEntity<>(updatedInsignia, HttpStatus.OK);
+            return ResponseEntity.ok("Insignia actualizada con éxito");
+        } catch (InsigniaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/eliminarinsignia")
-    public String deleteInsignia(
-            @RequestParam(name = "idInsignia") Integer idInsignia) {
-        return insigniaService.deleteInsignia(idInsignia);
+    public ResponseEntity<?> deleteInsignia(
+            @RequestParam(name = "idInsignia") int idInsignia) {
+        try {
+            insigniaService.deleteInsignia(idInsignia);
+            return ResponseEntity.ok("Insignia Eliminada");
+        } catch (InsigniaException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 }
