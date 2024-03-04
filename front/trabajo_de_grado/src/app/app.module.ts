@@ -10,9 +10,9 @@ import { PerfilComponent } from './containers/acciones/perfil/perfil.component';
 import { InicioComponent } from './containers/acciones/inicio/inicio.component';
 import { RecursosComponent } from './containers/acciones/recursos/recursos.component';
 import { FormPerfilComponent } from './containers/acciones/perfil/modal/form-perfil/form-perfil.component';
-import { NavbarComponent } from './globales/navbar/navbar.component';
+import { NavbarComponent } from './utils/globales/navbar/navbar.component';
 import { TestinicialComponent } from './utils/testinicial/testinicial.component';
-import { AlertsComponent } from './utils/alerts/alerts.component';
+import { AlertsComponent } from './utils/globales/alerts/alerts.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';

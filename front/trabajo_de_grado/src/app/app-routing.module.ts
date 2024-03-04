@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'recursos', component: RecursosComponent},
 
 
-  { path: '', redirectTo: '/login', pathMatch: 'full'},
+  { path: '', redirectTo: '/inicio', pathMatch: 'full'},
 
 ]; 
 

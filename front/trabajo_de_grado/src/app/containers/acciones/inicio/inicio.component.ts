@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
-import { TestinicialComponent } from 'src/app/utils/testinicial/testinicial.component';
 
 
 @Component({
@@ -11,16 +8,8 @@ import { TestinicialComponent } from 'src/app/utils/testinicial/testinicial.comp
 })
 export class InicioComponent implements OnInit{
 
-  constructor(public test: MatDialog){}
+  constructor(){}
 
-  ngOnInit(): void{
-    this.testInicial();
-  }
+  ngOnInit(): void{}
 
-  testInicial(){
-    const dialogRef = this.test.open(TestinicialComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Test result: ${result}');
-    })
-  }
 }

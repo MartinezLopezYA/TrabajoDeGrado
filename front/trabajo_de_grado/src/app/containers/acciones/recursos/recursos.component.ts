@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./recursos.component.css']
 })
 export class RecursosComponent {
+  
+  constructor(){}
 
 }
