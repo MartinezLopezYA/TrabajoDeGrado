@@ -15,9 +15,10 @@
 
 .aside-inicio{
     width: 25%;
-    height: 90vh;
+    height: 87vh;
     background-color: gray !important;
     border-radius: 0 10px 10px 0;
+    scroll-behavior: auto;
 }
 
 .aside-container{
@@ -34,10 +35,6 @@
     color: #002557;
     border-bottom: .5px solid #0000003d;
     vertical-align: middle;
-}
-
-.aside-container a:hover{
-    height: 40px;
 }
 
 a div {
