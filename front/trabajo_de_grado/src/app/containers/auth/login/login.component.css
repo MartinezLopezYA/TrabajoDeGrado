@@ -83,7 +83,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    background-image: url("../../../assets/LogoAPP.png");
+    background-image: url("../../../../assets/LogoAPP.png");
     background-repeat: no-repeat;   
     background-size: cover;
     border-radius: 5px;

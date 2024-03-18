@@ -5,40 +5,44 @@
     font-family: 'Poppins';
 }
 
+/* El navbar - Estilos determinados para vista en PC o dispositivos 
+con un ancho de pantalla de mas de 900px */
+
 .navbar{
     width: 100%;
-    height: 60px;
-    padding: 0 15px;
+    height: 50px;
+    padding: 0 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     background-color: #002557;
-    position: relative;
-}
-
-.navbar img {
-    height: 40px !important;
+    position: fixed;
+    top: 0;
 }
 
 .logo>a {
     display: flex;
     flex-direction: row;
     align-items: center; 
-    gap: 10px;
+    gap: 5px;
 }
 
 .logo>a>img:nth-child(3) {
     display: none;
 }
 
+.navbar img {
+    height: 30px !important;
+}
+
 .vinculos, .acciones-perfil {
-    height: 60px;
+    height: 50px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 7px;
 }
 
 .vinculos a {
@@ -48,18 +52,18 @@
     color: #ffffff;
     font-weight: 700;
     list-style: none;
-    transition: all 0.5s ease-in-out;
-    
+    transition: all 0.3s ease-in-out;
 }
 
-.vinculos ol:hover{
+.vinculos ol:hover {
     transform: scale(1.06);
     color: #E9C010;
 }
 
-.acciones-perfil p {
-    color: #ffffff;
+.navbar .nav-link.active {
+    color: #E9C010; 
 }
+
 
 .nav-item {
     text-align: center;
@@ -70,6 +74,21 @@
     height: auto !important;
     display: none;
 }
+
+.acciones-perfil {
+    display: flex;
+    gap: 15px;
+}
+
+.acciones-perfil p {
+    width: 150px;
+    text-align: right;
+    color: #ffffff;
+    font-weight: 400;
+}
+
+/* El navbar - Estilos determinados para vista en tablet o dispositivos 
+con un ancho de pantalla de menos de 900px */
 
 @media screen and (max-width: 900px) {
     
@@ -82,7 +101,6 @@
     }
     
     .logo>a>img, #perfil>img {
-        /* width: 100px; */
         height: 25px !important;
     }
 
@@ -90,10 +108,24 @@
         height: 40px;
     }
 
+    .acciones-perfil p {
+        display: none;
+    }
 
 }
 
-@media screen and (max-width: 650px) { 
+/* El navbar - Estilos determinados para vista en dispositivos moviles o 
+dispositivos con un ancho de pantalla de menos de 700px */
+
+@media screen and (max-width: 700px) { 
+
+    .logo>a>img:nth-child(3) {
+        display: inline-block;
+    }
+
+    .logo>a>img:nth-child(2) {
+        display: none;
+    }
 
     .nav-item>img {
         width: 20px;
@@ -106,14 +138,6 @@
     } 
 
     .nav-item>p {
-        display: none;
-    }
-
-    .logo>a>img:nth-child(3) {
-        display: inline-block;
-    }
-
-    .logo>a>img:nth-child(2) {
         display: none;
     }
 

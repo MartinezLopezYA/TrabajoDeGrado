@@ -1,0 +1,67 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+.container-fluid {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-color: #f2f5f8;
+    padding: 10px;
+}
+
+.navbar {
+    width: 250px;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 50px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.navbar>a{
+    color: #002557;
+}
+
+.navbar-brand {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 10px;
+    gap: 10px;
+}
+
+.navbar-brand>img {
+    width: 20px;
+    height: 20px;
+}
+
+.navbar-nav{
+    width: 100%;
+    padding: 5px 10px;
+}
+
+.navbar-nav>img, .nav-link>img {
+    width: 25px;
+    height: 25px;
+}
+
+.nav-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.nav-link.active {
+    color: #002557;
+}

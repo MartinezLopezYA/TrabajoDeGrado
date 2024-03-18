@@ -79,7 +79,7 @@
     display: flex;
     justify-content: center;
     align-content: center;
-    background-image: url("../../../assets/LogoAPP.png");
+    background-image: url("../../../../assets/LogoAPP.png");
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 5px;
@@ -274,7 +274,7 @@ tablet
 
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 700px) {
     
     .aside-container {
         display: none;
