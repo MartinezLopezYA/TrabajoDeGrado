@@ -8,25 +8,25 @@
                 <h1> {{ nombreApp }} </h1>
             </div>
             <div class="vistaformulario ">
-                <div class="form-container container modal-content">
-                    <form [formGroup]="myForm">
+                <div class="form-container modal-content">
+                    <form [formGroup]="myForm" class="form">
                         <div class="formulario">
                             <div>
                                 <h3>REGISTRAR USUARIO</h3>
                             </div>
                             <div class="params">
-                                <input formControlName="correoUsuario" matInput #input class="form-control" type="email" placeholder="Correo Electronico"> 
+                                <input class="form-control" type="email" placeholder="Correo Electronico"> 
                                 <div class="params-group">
-                                    <input formControlName="nombreUsuario" matInput #input class="form-control" type="text" placeholder="Nombre">
-                                    <input formControlName="apellidoUsuario" matInput #input class="form-control" type="text" placeholder="Apellido">
+                                    <input class="form-control" type="text" id="floatingInput"placeholder="Nombre">
+                                    <input class="form-control" type="text" placeholder="Apellido">
                                 </div>
                                 <div class="params-group">
-                                    <input formControlName="contrasena" matInput #input class="form-control" type="password" placeholder="Contraseña">
-                                    <input formControlName="idUsuario" matInput #input class="form-control" type="number" placeholder="ID">
+                                    <input class="form-control" type="password" placeholder="Contraseña">
+                                    <input class="form-control" type="number" placeholder="ID">
                                 </div>
                                 <div class="params-group">
-                                    <input formControlName="semestre" matInput #input class="form-control" type="number" placeholder="Semestre">
-                                    <input formControlName="fechaNacimiento" matInput #input class="form-control" id="nacimiento" type="date">
+                                    <input class="form-control" type="number" placeholder="Semestre">
+                                    <input class="form-control" id="nacimiento" type="date">
                                 </div>
                             </div>
                             <hr>
@@ -44,4 +44,4 @@
             </div>
         </div>
     </section>
-</section>
+</section> 

@@ -1,0 +1,144 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+/* El navbar - Estilos determinados para vista en PC o dispositivos 
+con un ancho de pantalla de mas de 900px */
+
+.navbar{
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #002557;
+    position: fixed;
+    top: 0;
+}
+
+.logo>a {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    gap: 5px;
+}
+
+.logo>a>img:nth-child(3) {
+    display: none;
+}
+
+.navbar img {
+    height: 30px !important;
+}
+
+.vinculos, .acciones-perfil {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 7px;
+}
+
+.vinculos a {
+    text-decoration: none;
+    letter-spacing: 1.5px;
+    padding: 5px 10px;
+    color: #ffffff;
+    font-weight: 700;
+    list-style: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.vinculos ol:hover {
+    transform: scale(1.06);
+    color: #E9C010;
+}
+
+.navbar .nav-link.active {
+    color: #E9C010; 
+}
+
+
+.nav-item {
+    text-align: center;
+}
+
+.nav-item>img {
+    width: 20px;
+    height: auto !important;
+    display: none;
+}
+
+.acciones-perfil {
+    display: flex;
+    gap: 15px;
+}
+
+.acciones-perfil p {
+    width: 150px;
+    text-align: right;
+    color: #ffffff;
+    font-weight: 400;
+}
+
+/* El navbar - Estilos determinados para vista en tablet o dispositivos 
+con un ancho de pantalla de menos de 900px */
+
+@media screen and (max-width: 900px) {
+    
+    * {
+        font-size: 14px;
+    }
+
+    .navbar {
+        height: 45px;
+    }
+    
+    .logo>a>img, #perfil>img {
+        height: 25px !important;
+    }
+
+    .vinculos, .acciones-perfil {
+        height: 40px;
+    }
+
+    .acciones-perfil p {
+        display: none;
+    }
+
+}
+
+/* El navbar - Estilos determinados para vista en dispositivos moviles o 
+dispositivos con un ancho de pantalla de menos de 700px */
+
+@media screen and (max-width: 700px) { 
+
+    .logo>a>img:nth-child(3) {
+        display: inline-block;
+    }
+
+    .logo>a>img:nth-child(2) {
+        display: none;
+    }
+
+    .nav-item>img {
+        width: 20px;
+        height: auto !important;
+        display: inline-block;
+    }
+
+    .nav-item>img:nth-child(1) {
+        color: wheat;
+    } 
+
+    .nav-item>p {
+        display: none;
+    }
+
+}

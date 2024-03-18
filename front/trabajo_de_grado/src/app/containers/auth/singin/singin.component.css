@@ -1,11 +1,4 @@
-:root{
-    --colorPrimary: (#002557);
-    --colorSecundario: (#E9C010);
-    --colorUrls: (#0F86D6);
-}
-
 /* Reinicio de estilos */
-
 * {
     padding: 0;
     margin: 0;
@@ -25,10 +18,12 @@
 .container{
     width: 80%;
     background-color: #ffffff46;   
+    border-radius: 5px;
 }
 
 .vista {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -43,6 +38,7 @@
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
+    border-radius: 5px 5px 0 0;
 }
 
 .navbar h1 {
@@ -78,15 +74,16 @@
 }
 
 .form-container { 
-    width: 70%;
-    height: 100%;
+    width: 70% !important;
+    height: 100% !important;
     display: flex;
     justify-content: center;
     align-content: center;
-    background-image: url("../../../assets/LogoAPP.png");
-    background-repeat: no-repeat;   
+    background-image: url("../../../../assets/LogoAPP.png");
+    background-repeat: no-repeat;
     background-size: cover;
     border-radius: 5px;
+    overflow-y: auto;
 }
 
 .form-container::before{
@@ -96,22 +93,28 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(51, 51, 51, 0.884);
     border-radius: 5px;
 }
 
+.form {
+    width: 100%;
+    height: 100%;       
+}
+
 .formulario {    
-    z-index: 100;
+    z-index: 100;    
     width: 100%;
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
     gap: 40px; 
+    background-color: rgba(51, 51, 51, 0.7) !important;
+    padding: 25px 0;
 }
 
-.formulario h3 {
-    font-weight: 700;
+h3 {
+    text-align: center;
     font-size: 24px;
 }
 
@@ -129,12 +132,13 @@
 }
 
 .params input {
+    font-size: 13px;
     width: 400px;
     height: 40px;
     color: #ffffff;
     border-radius: 5px;
     border: none;
-    padding: 0 10px;
+    padding: 0 15px;
     background-color: rgba(51, 51, 51, 0.46);
     border: 1px solid #00000046;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.46);
@@ -186,6 +190,7 @@
 
 .btn-params button:nth-child(3) { 
     background-color: #E9C010;
+    color: #002557;
 }
 
 .btn-params button:focus, button:hover {
@@ -211,3 +216,100 @@
     height: 3px;
     background-color: #ffffff;
 }   
+
+
+
+/* Inicia el diseño responsive
+tablet
+*/
+
+@media screen and (max-width: 900px) {
+
+    .vistaformulario {
+        width: 100% !important;
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+        gap: 5px;
+        top: 100;
+    }
+
+    .formulario h3 {
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    .formulario hr {
+        z-index: 98;
+        width: 300px;
+        height: 3px;
+        background-color: #ffffff;
+    }   
+
+    .params {
+        gap: 8px;
+    }
+    
+    .params input {
+        width: 300px;
+    }
+
+    .params-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .btn-params {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .btn-params button {
+        width: 300px;
+        height: 40px;
+    }
+
+}
+
+@media screen and (max-width: 700px) {
+    
+    .aside-container {
+        display: none;
+    }
+
+    .form-container {
+        width: 100% !important;
+    }
+
+    .vistaformulario {
+        height: 100%;   
+        border-radius: 5px;
+    }
+
+    .form-container {
+        background-image: none;
+    }
+
+    .form {
+        height: 100% !important;
+    }
+    .navbar>a, hr {
+        display: none;
+    }
+
+    .navbar> h1 {
+        font-size: 20px;
+    }
+
+    .container{
+        width: 100%;
+        height: auto;
+    }
+
+    .params input {
+        width: 250px;
+    }
+}
