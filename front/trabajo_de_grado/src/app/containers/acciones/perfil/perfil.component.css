@@ -68,16 +68,3 @@
     background-color: #E9C010;
     box-shadow: 2px 2px 5px #E9C010;
 }
-
-.insignias {
-    width: 50%;
-    padding: 10px;
-    display: flex;
-    justify-content: space-around;   
-    box-shadow: 1px 1px 5px grey, -1px -1px 5px grey;
-    border-radius: 5px;
-}
-
-.insignias img {
-    width: 50px;
-}

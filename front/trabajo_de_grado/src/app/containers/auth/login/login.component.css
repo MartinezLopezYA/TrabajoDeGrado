@@ -25,21 +25,10 @@
 .container{
     width: 80%;
     background-color: #ffffff46;
-    border-radius: 5px;
-}
-
-.container-fluid {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #f2f5f8;
-  padding: 10px;
 }
 
 .vista {
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -89,15 +78,14 @@
 }
 
 .form-container {
-    width: 70% !important;
-    height: 100% !important;
+    width: 70%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-content: center;
-    background-image: url("../../../assets/LogoAPP.png");
+    background-image: url("../../../../assets/LogoAPP.png");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
     border-radius: 5px;
 }
 
@@ -170,10 +158,8 @@
 }
 
 .btn-params button {
-    padding: auto;
     width: 175px;
     height: 40px;
-    font-size: 15px;
     border: none;
     border-radius: 5px;
     color: #ffffff;
@@ -191,7 +177,6 @@
 .btn-params button:focus, button:hover {
     transform: scale(1.06);
 }
-
 
 .aside-container {
     width: 30%;
@@ -211,167 +196,4 @@
     width: 400px;
     height: 3px;
     background-color: #ffffff;
-}
-
-@media screen and (max-width: 1700px) {
-
-  .btn-params button{
-    padding: auto;
-    width: 155px;
-    height: 38px;
-    font-size: 16px;
-  }
-
-  .params .form-control{
-    width: 410px;
-    height: 40px;
-    font-size: 16px;
-  }
-
-  .form-container{
-    width: 70%;
-    height: 100%;
-  }
-
-  .form-container {
-    background-size: cover;
-  }
-
-}
-
-@media screen and (max-width: 1060px){
-
-  .btn-params button{
-    padding: auto;
-    width: 145px;
-    height: 43px;
-    font-size: 15px;
-  }
-
-  .params .form-control{
-    width: 340px;
-    height: 43px;
-    font-size: 15px;
-  }
-
-  .form-container{
-    width: 70%;
-    height: 100%;
-  }
-
-  .form-container {
-    background-size: cover;
-  }
-
-  .navbar> h1 {
-    font-size: 18px;
-  }
-
-  .formulario hr {
-    z-index: 98;
-    width: 340px;
-    height: 3px;
-    background-color: #ffffff;
-  }
-
-}
-
-@media screen and (max-width: 768px){
-
-  .btn-params{
-    flex-direction: column;
-    gap: 7px;
-  }
-
-  .btn-params button{
-    padding: auto;
-    width: 320px;
-    height: 40px;
-    font-size: 14px;
-  }
-
-  .params .form-control{
-    width: 320px;
-    height: 40px;
-    font-size: 14px;
-  }
-
-  .form-container{
-    width: 70%;
-    height: 100%;
-  }
-
-  .form-container {
-    background-size: cover;
-  }
-
-  .navbar> h1 {
-    font-size: 18px;
-  }
-
-  .aside-container {
-    display: none;
-  }
-
-  .form-container {
-    width: 100% !important;
-  }
-
-  .formulario hr {
-    z-index: 98;
-    width: 320px;
-    height: 3px;
-    background-color: #ffffff;
-  }
-
-}
-
-@media screen and (max-width: 620px){
-
-  .btn-params{
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .btn-params button{
-    padding: auto;
-    width: 270px;
-    height: 38px;
-    font-size: 13px;
-  }
-
-  .params .form-control{
-    width: 270px;
-    height: 38px;
-    font-size: 13px;
-  }
-
-  .form-container{
-    width: 70%;
-    height: 100%;
-  }
-
-  .form-container {
-    background-size: cover;
-  }
-
-  .navbar> h1 {
-    font-size: 18px;
-  }
-
-  .aside-container {
-    display: none;
-  }
-
-  .form-container {
-    width: 100% !important;
-  }
-
-  .formulario hr {
-    z-index: 98;
-    width: 270px;
-    height: 3px;
-    background-color: #ffffff;
-  }
-
 }
