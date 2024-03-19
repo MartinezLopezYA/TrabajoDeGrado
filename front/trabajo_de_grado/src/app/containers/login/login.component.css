@@ -267,6 +267,13 @@
     font-size: 18px;
   }
 
+  .formulario hr {
+    z-index: 98;
+    width: 340px;
+    height: 3px;
+    background-color: #ffffff;
+  }
+
 }
 
 @media screen and (max-width: 768px){
@@ -303,7 +310,14 @@
 
   .form-container {
     width: 100% !important;
-}
+  }
+
+  .formulario hr {
+    z-index: 98;
+    width: 320px;
+    height: 3px;
+    background-color: #ffffff;
+  }
 
 }
 
@@ -314,6 +328,7 @@
     width: 115px;
     height: 38px;
     font-size: 13px;
+
   }
 
   .params .form-control{
@@ -341,6 +356,13 @@
 
   .form-container {
     width: 100% !important;
-}
+  }
+
+  .formulario hr {
+    z-index: 98;
+    width: 270px;
+    height: 3px;
+    background-color: #ffffff;
+  }
 
 }
