@@ -6,13 +6,13 @@
                         alt="Logo Uniminuto"> </a>
                 <hr>
                 <h1> {{ nombreApp }} </h1>
-            </div> 
+            </div>
             <div class="vistaformulario ">
                 <div class="form-container container modal-content">
                     <form  [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
                         <div class="formulario">
                             <div>
-                                <h3>INICIAR SESIÓN</h3>
+                                <h3 class="titlle">INICIAR SESIÓN</h3>
                             </div>
                             <div class="params">
                                 <input formControlName="email" class="form-control" id="email" name="email" type="email" placeholder="Correo Electronico">
