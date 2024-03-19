@@ -278,9 +278,14 @@
 
 @media screen and (max-width: 768px){
 
+  .btn-params{
+    flex-direction: column;
+    gap: 7px;
+  }
+
   .btn-params button{
     padding: auto;
-    width: 135px;
+    width: 320px;
     height: 40px;
     font-size: 14px;
   }
@@ -323,12 +328,16 @@
 
 @media screen and (max-width: 620px){
 
+  .btn-params{
+    flex-direction: column;
+    gap: 5px;
+  }
+
   .btn-params button{
     padding: auto;
-    width: 115px;
+    width: 270px;
     height: 38px;
     font-size: 13px;
-
   }
 
   .params .form-control{
