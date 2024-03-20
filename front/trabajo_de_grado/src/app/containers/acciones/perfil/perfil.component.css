@@ -1,9 +1,3 @@
-:root{
-    --colorPrimary: (#002557);
-    --colorSecundario: (#E9C010);
-    --colorUrls: (#0F86D6);
-}
-
 * {
     padding: 0;
     margin: 0;
@@ -11,60 +5,157 @@
     font-family: 'Poppins';
 }
 
-.body {
-    width: 100%;
+/* El perfil - Estilos determinados para vista en PC o dispositivos 
+con un ancho de pantalla de mas de 900px */
+
+.container-fluid {
+    font-size: 14px;
+    width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #F2F2F2;
     align-items: center;
-}
-
-#perfil img {
-    width: 30px;
-    height: auto !important;
+    background-color: #f2f5f8;
+    padding: 10px;
 }
 
 .container {
-    width: 70%;
-    height: 70vh;
-    margin: 5px;
-    background-color: #ffffff;
-    box-shadow: 2px 2px 5px gray, -2px -2px 5px gray;
-    border-radius: 5px;
+    width: 70vw;
+    height: 90%;
     display: flex;
-    align-content: center;
     flex-direction: column;
-    gap: 10px;
-    padding: 10px;
     align-items: center;
+    gap: 30px;
+    position: relative;
+    top: 60px;
+    border-radius: 5px;
+    box-shadow: rgba(128, 128, 128, 0.202) 3px 3px 10px, rgba(128, 128, 128, 0.202) -3px -3px 10px;
+    overflow-y: auto;
+}
+
+.container::-webkit-scrollbar {
+    width: 5px; 
+}
+
+.container::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: #002557; 
+    transition: all 0.3s ease-in-out;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+    background-color: #E9C010;
 }
 
 .datos-personales {
     width: 100%;
-    height: 150px;
+    width: 100%;
+    padding: 10px;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar {
+    border: #002557 solid 2px;
+    border-radius: 50%;
+}
+.navbar>img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.informacion-personal {
+    width: 100%;
+    text-align: center;
+}
+
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: #E9C010;
+    border-radius: 5PX;
+    font-size: 22px;
+    color: #002557;
+}
+
+.header>button{
+    display:flex;
     align-items: center;
 }
 
-.informacion-personal{
-    width: 50%;
-    text-align: left;
+.datos {
+    padding: 10px;
 }
 
-.informacion-personal a {
-    color: #0F86D6;
-    text-decoration: none;
+.datos-lista { 
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    gap: 5px;
 }
 
-.foto-perfil img{
-    width: 150px;
-}
-
-.container hr{
+.datos-lista>li {
     width: 100%;
-    height: 3px;
-    background-color: #E9C010;
-    box-shadow: 2px 2px 5px #E9C010;
+    list-style: none;
+    display: flex;
+}
+
+.datos-lista>li>label { 
+    width: 150px;
+    color: #002557;
+    font-weight: 600;
+}
+
+/* El perfil - Estilos determinados para vista en dispositivos moviles o 
+dispositivos con un ancho de pantalla de menos de 900px */
+
+
+@media screen and (max-width:900px) {
+    .container {
+        font-size: 14px;
+    }
+
+    .navbar>img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .header>h4 {
+        font-size: 16px;
+    }
+
+    .datos-lista>li>label { 
+        width: 100px;
+    }
+}
+
+/* El Perfil - Estilos determinados para vista en dispositivos moviles o 
+dispositivos con un ancho de pantalla de menos de 700px */
+
+
+@media screen and (max-width: 700px) {
+    .container {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    .navbar>img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .datos-lista>li>label {
+        width: 90px;
+    }
+
+    .datos-lista {
+        width: 100%;
+    }
 }

@@ -21,14 +21,15 @@ con un ancho de pantalla de mas de 900px */
 
 .container {
     width: 70vw;
-    /* height: 10px; */
-    /* background-color: #ffffff; */
+    height: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 30px;
     position: relative;
     top: 60px;
+    border-radius: 5px;
+    box-shadow: rgba(128, 128, 128, 0.202) 3px 3px 10px, rgba(128, 128, 128, 0.202) -3px -3px 10px;
 }
 
 .form {
@@ -80,6 +81,7 @@ con un ancho de pantalla de mas de 900px */
 
 .btn:active {
     background-color: #002557;
+    border-color: #002557;
     color: #E9C010;
 }
 

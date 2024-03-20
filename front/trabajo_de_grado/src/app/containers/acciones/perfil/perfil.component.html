@@ -1,22 +1,27 @@
 <app-navbar></app-navbar>
-<section class="body">
-    <section class="container">
+
+<section class="container-fluid">
+
+    <div class="container">
         <div class="datos-personales">
-            <div class="foto-perfil">
-                <img src="../../../assets/Freepik - Img Perfil.png" alt="">
+            <div class="navbar">
+                <img src="../../../../assets/Freepik - Img Perfil.png" alt="Foto de Perfil">
             </div>
-            <!-- <div *ngIf="usuarioAutenticado" class="informacion-personal">
-                <p>{{ usuarioAutenticado.idUsuario }}</p>
-                <p>{{ usuarioAutenticado.nombreUsuario }} {{ usuarioAutenticado.apellidoUsuario }} </p>
-                <p>{{ usuarioAutenticado.correoUsuario }}</p>
-                <p>{{ usuarioAutenticado.fechaNacimiento }}</p>
-                <p>{{ usuarioAutenticado.semestre }} </p>
-                <a (click)="editarInformacion()" >Editar Información</a>
-            </div> -->
-            <div class="avance">
-                <img src="../../../assets/DinoSoftLab - Porcentaje Avance.png" alt="Porcentaje de Avance">
+            <div class="informacion-personal">
+                <div class="header">
+                    <h4> DATOS DEL ESTUDIANTE</h4>
+                    <button class="btn"><img src="../../../../assets/Pixel Perfect - Editar.png" alt="Actualizar Información"></button>
+                </div>
+                <div class="datos">
+                    <ul class="datos-lista">
+                        <li><label>ID:</label><p>000708115</p></li>
+                        <li><label>SEMESTRE:</label><p>10 - Decimo</p></li>
+                        <li><label>NOMBRE:</label><p>Yerson Andres Martinez Lopez</p></li>
+                        <li><label>CORREO:</label><p>yerson.martinez-l@uniminuto.edu.co</p></li>
+                        <li><label>NACIMIENTO:</label><p></p>09 / 03 / 2001</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </section>
-
+    </div>
 </section>

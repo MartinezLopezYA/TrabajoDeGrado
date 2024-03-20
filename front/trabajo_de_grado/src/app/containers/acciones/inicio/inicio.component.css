@@ -49,6 +49,8 @@
     align-items: center;
     text-align: center;
     gap: 10px;
+    border: none;
+    box-shadow: rgba(128, 128, 128, 0.202) 3px 3px 10px, rgba(128, 128, 128, 0.202) -3px -3px 10px;
 }
 
 .card>img {
