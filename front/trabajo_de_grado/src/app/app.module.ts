@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+
+import { MaterialModule } from './material.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,12 +17,6 @@ import { NavbarComponent } from './utils/globales/navbar/navbar.component';
 import { TestinicialComponent } from './utils/testinicial/testinicial.component';
 import { AlertsComponent } from './utils/globales/alerts/alerts.component';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatDialogModule } from '@angular/material/dialog';
 import { CursoPythonComponent } from './containers/cursos/curso-python/curso-python.component';
 import { FooterComponent } from './utils/globales/footer/footer.component';
 import { QuicesComponent } from './containers/acciones/quices/quices.component';
@@ -44,17 +41,11 @@ import { InsigniasComponent } from './containers/acciones/insignias/insignias.co
     InsigniasComponent,
   ],
   imports: [
+    AppRoutingModule, 
     BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    
-    //Angular Material
     BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTabsModule,
-    MatDialogModule,
+    MaterialModule,
+
 
     //HttpClient
     HttpClientModule

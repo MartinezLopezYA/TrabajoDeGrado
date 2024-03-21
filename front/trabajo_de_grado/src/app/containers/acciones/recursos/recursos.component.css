@@ -1,0 +1,30 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins';
+}
+
+.container-fluid {
+    font-size: 14px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f5f8;
+    padding: 10px;
+}
+
+.container {
+    width: 70vw;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+    top: 60px;
+    border-radius: 5px;
+    box-shadow: rgba(128, 128, 128, 0.202) 3px 3px 10px, rgba(128, 128, 128, 0.202) -3px -3px 10px;
+}

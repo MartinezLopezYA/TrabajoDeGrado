@@ -1,33 +1,55 @@
 <!-- editar-informacion.component.html -->
-<h2 mat-dialog-title>Dialog with elements</h2>
-<mat-dialog-content>This dialog showcases the title, close, content and actions elements.</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
-</mat-dialog-actions>
-<!-- 
-<form [formGroup]="formularioEdicion" (ngSubmit)="guardarEdicion()"> 
-  <div>
-    <label for="nombreUsuario">Nombre de Usuario:</label>
-    <input type="text" id="nombreUsuario" formControlName="nombreUsuario" required />
-  </div>
+<div class="container">
 
-  <div>
-    <label for="apellidoUsuario">Apellido de Usuario:</label>
-    <input type="text" id="apellidoUsuario" formControlName="apellidoUsuario" required />
-  </div>
+  <form class="form" [formGroup]="myForm" (ngSubmit)="guardarEdicion()">
 
-  <div>
-    <label for="semestre">Semestre:</label>
-    <input type="text" id="semestre" formControlName="semestre" required />
-  </div>
+    <h4>Actualizar Información</h4>
 
-  <div>
-    <label for="fechaNacimiento">Fecha de Nacimiento:</label>
-    <input type="date" id="fechaNacimiento" formControlName="fechaNacimiento" required />
-  </div>
+    <mat-dialog-content class="mat-dialog-content">
+      <div class="mat-input-group">
+        <mat-form-field class="mat-input one col-5">
+          <mat-label id="mat-labe onel">ID de Estudiante</mat-label>
+          <input id="mat-input one" formControlName="idUsuario" matInput placeholder="ID de Estudiante">
+        </mat-form-field>
 
-  <div class="botones">
-    <button type="submit" routerLink="/perfil">Guardar</button>
-    <button type="button" (click)="cancelarEdicion()">Cancelar</button>
-  </div>
-</form> -->
+        <mat-form-field class="mat-input two col-5">
+          <mat-label id="mat-labe twol">Semestre de Estudiante</mat-label>
+          <input id="mat-input two" formControlName="semUsuario" matInput placeholder="Semestre de Estudiante">
+        </mat-form-field>
+      </div>
+
+      <div class="mat-input-group">
+        <mat-form-field class="mat-input trhee col-5">
+          <mat-label id="mat-label" trhee>Nombre de Estudiante</mat-label>
+          <input id="mat-input trhee" formControlName="nomUsuario" matInput placeholder="Nombre de Estudiante">
+        </mat-form-field>
+
+        <mat-form-field class="mat-input four col-5">
+          <mat-label id="mat-label four">Apellido de Estudiante</mat-label>
+          <input id="mat-input four" formControlName="apeUsuario" matInput placeholder="Apellido de Estudiante">
+        </mat-form-field>
+      </div>
+
+      <div class="mat-input-group">
+        <mat-form-field class="mat-input five col-5">
+          <mat-label id="mat-label five">Correo de Estudiante</mat-label>
+          <input id="mat-input five" formControlName="emaUsuario" matInput placeholder="Correo de Estudiante">
+        </mat-form-field>
+
+        <mat-form-field class="mat-input col-5">
+          <mat-label id="mat-label">Fecha de Nacimietno</mat-label>
+          <input id="mat-input" formControlName="fnaUsuario" matInput [matDatepicker]="picker">
+          <mat-hint>DD/MM/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+
+    <div class="botones">
+      <button class="btn" type="submit" routerLink="/perfil">Guardar</button>
+      <button class="btn" type="button" (click)="cancelarEdicion()">Cancelar</button>
+    </div>
+  </form>
+
+</div>

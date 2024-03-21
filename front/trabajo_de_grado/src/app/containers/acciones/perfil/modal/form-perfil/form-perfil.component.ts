@@ -1,14 +1,37 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DialogData } from '../../perfil.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-perfil',
   templateUrl: './form-perfil.component.html',
   styleUrls: ['./form-perfil.component.css'],
 })
-export class FormPerfilComponent {
-  // formularioEdicion: FormGroup;
+export class FormPerfilComponent implements OnInit {
+  myForm!: FormGroup;
 
-  constructor(){}
+  constructor(public df: MatDialogRef<FormPerfilComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,) { }
+
+  ngOnInit(): void {
+    this.myForm = new FormGroup({
+      idUsuario: new FormControl('000', [Validators.required]),
+      nomUsuario: new FormControl('Andres'),
+      apeUsuario: new FormControl('Martinez'),
+      semUsuario: new FormControl('10'),
+      emaUsuario: new FormControl('yerson.martinez-l@uniminuto.edu.co'),
+      fnaUsuario: new FormControl(''),
+    });
+  }
+  
+  guardarEdicion(){
+
+  }
+  
+  cancelarEdicion(): void {
+    this.df.close();
+  }
 
   // guardarEdicion(): void {
   //   if (this.formularioEdicion.valid) {
@@ -34,7 +57,4 @@ export class FormPerfilComponent {
   //   }
   // }
 
-  // cancelarEdicion(): void {
-  //   this.dialogRef.close();
-  // }
 }

@@ -87,6 +87,11 @@ con un ancho de pantalla de mas de 900px */
 .header>button{
     display:flex;
     align-items: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.header>button:hover {
+    transform: scale(1.06);
 }
 
 .datos {
