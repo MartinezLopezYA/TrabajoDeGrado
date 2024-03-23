@@ -11,6 +11,15 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class FormPerfilComponent implements OnInit {
   myForm!: FormGroup;
 
+  fechaActual = new Date();
+  
+  // Establecer la fecha por defecto en el formato correcto para el control de formulario
+  fechaPorDefecto = `${this.fechaActual.getFullYear()}-${this.formatoDosDigitos(this.fechaActual.getMonth() + 1)}-${this.formatoDosDigitos(this.fechaActual.getDate())}`;
+  
+  formatoDosDigitos(numero: number): string {
+    return numero < 10 ? '0' + numero : '' + numero;
+  }
+
   constructor(public df: MatDialogRef<FormPerfilComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,) { }
 
@@ -21,7 +30,7 @@ export class FormPerfilComponent implements OnInit {
       apeUsuario: new FormControl('Martinez'),
       semUsuario: new FormControl('10'),
       emaUsuario: new FormControl('yerson.martinez-l@uniminuto.edu.co'),
-      fnaUsuario: new FormControl(''),
+      fnaUsuario: new FormControl(this.fechaPorDefecto),
     });
   }
   
@@ -32,6 +41,7 @@ export class FormPerfilComponent implements OnInit {
   cancelarEdicion(): void {
     this.df.close();
   }
+
 
   // guardarEdicion(): void {
   //   if (this.formularioEdicion.valid) {

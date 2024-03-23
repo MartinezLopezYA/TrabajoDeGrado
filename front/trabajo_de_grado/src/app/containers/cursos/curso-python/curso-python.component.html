@@ -1,33 +1,389 @@
 <app-navbar></app-navbar>
 
 <section class="container-fluid">
-    
+
     <nav class="navbar justify-content-start">
         <a routerLink="/inicio" class="navbar-brand">
-            <img src="../../../../assets/Freepik - Volver a Cursos.png">
+            <img src="../../../../assets/curso-python/navbar/Freepik - Volver a Cursos.png">
             <p>Ir a cursos</p>
         </a>
         <ul class="navbar-nav nav-underline gap-2">
             <li class="nav-item">
-                <a class="nav-link active" href="#">
-                    <img src="../../../../assets/Freepik - Que es Py.png">
-                    <p>¿Qué es Python?</p>
+                <a class="nav-link active" [class.active]="mostrarDiv1" (click)="mostrarSeccion(1)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Que es Py.png">
+                    <p>Sobre Python</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <img src="../../../../assets/Freepik - Requisito.png">
+                <a class="nav-link" [class.active]="mostrarDiv2" (click)="mostrarSeccion(2)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Requisito.png">
                     <p>Requisitos</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <img src="../../../../assets/Freepik - Programacion.png">
+                <a class="nav-link" [class.active]="mostrarDiv3" (click)="mostrarSeccion(3)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Programacion.png">
                     <p>Sintaxis</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv4" (click)="mostrarSeccion(4)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Comentarios.png">
+                    <p>Comentarios</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv5" (click)="mostrarSeccion(5)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Variables.png">
+                    <p>Variables</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv6" (click)="mostrarSeccion(6)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Carpeta.png">
+                    <p>Tipos de Datos</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv7" (click)="mostrarSeccion(7)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Operadores.png">
+                    <p>Operadores</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv8" (click)="mostrarSeccion(8)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Array.png">
+                    <p>Conjuntos</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv9" (click)="mostrarSeccion(9)">
+                    <img src="../../../../assets/curso-python/navbar/Orvipixel - Sentencias de Control.png">
+                    <p>Sentencias de Control</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv10" (click)="mostrarSeccion(10)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Bucles.png">
+                    <p>Bucles</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv11" (click)="mostrarSeccion(11)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Funcion.png">
+                    <p>Funciones</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv12" (click)="mostrarSeccion(12)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Programacion.png">
+                    <p>Arrays</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv13" (click)="mostrarSeccion(13)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - POO.png">
+                    <p>POO en Python</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv14" (click)="mostrarSeccion(14)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Herencia.png">
+                    <p>Herencia</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv15" (click)="mostrarSeccion(15)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Iteracion.png">
+                    <p>Iteraciones</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv16" (click)="mostrarSeccion(16)">
+                    <img src="../../../../assets/curso-python/navbar/Edt.im - Conexion.png">
+                    <p>Polimorfismo</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv17" (click)="mostrarSeccion(17)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Alcance.png">
+                    <p>Alcance</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv18" (click)="mostrarSeccion(18)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Importar.png">
+                    <p>PIP</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="mostrarDiv19" (click)="mostrarSeccion(19)">
+                    <img src="../../../../assets/curso-python/navbar/Freepik - Excepciones.png">
+                    <p>Excepciones</p>
                 </a>
             </li>
         </ul>
     </nav>
 
-</section>
+    <div class="container">
+        <div class="container-body" *ngIf="mostrarDiv1">
+            <div class="header">
+                <h4>¿QUÉ ES PYTHON?</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+                <p>Python es un lenguaje de programación de alto nivel creado en 1991 por Guido Van Rossum</p>
 
+                <mat-tab-group>
+                    <mat-tab label="¿Qué se puede hacer con Python?"> </mat-tab>
+                    <mat-tab label="¿Por qué saber Python?"> </mat-tab>
+                    <mat-tab label="Comparado con otros lenguajes"> </mat-tab>
+                    <mat-tab label="Cuestionario"> </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv2">
+            <div class="header">
+                <h4>REQUISITOS PARA PROGRAMAR EN PYTHON</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv3">
+            <div class="header">
+                <h4>SINTAXIS DEL LENGUAJE</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv4">
+            <div class="header">
+                <h4>COMENTARIOS EN PYTHON</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv5">
+            <div class="header">
+                <h4>VARIABLES EN PYTHON</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv6">
+            <div class="header">
+                <h4>TIPOS DE DATOS</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv7">
+            <div class="header">
+                <h4>OPERADORES</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv8">
+            <div class="header">
+                <h4>CONJUNTOS</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv9">
+            <div class="header">
+                <h4>SENTENCIAS DE CONTROL</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv10">
+            <div class="header">
+                <h4>BUCLES</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv11">
+            <div class="header">
+                <h4>FUNCIONES</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv12">
+            <div class="header">
+                <h4>ARRAYS</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv13">
+            <div class="header">
+                <h4>PROGRAMACIÓN ORIENTADA A OBJETOS</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv14">
+            <div class="header">
+                <h4>HERENCIA</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv15">
+            <div class="header">
+                <h4>ITERACIONES</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv16">
+            <div class="header">
+                <h4>POLIMORFISMO</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv17">
+            <div class="header">
+                <h4>ALCANCE</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv18">
+            <div class="header">
+                <h4>PIP</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+        <div class="container-body" *ngIf="mostrarDiv19">
+            <div class="header">
+                <h4>EXCEPCIONES</h4>
+                <div class="paginacion">
+                    <a (click)="anteriorSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                    <a (click)="siguienteSeccion()" class="nav-link"><img src="../../../../assets/Freepik - Adelante.png"
+                            alt=""></a>
+                </div>
+            </div>
+            <div class="body-content">
+            </div>
+        </div>
+
+    </div>
+
+
+</section>
